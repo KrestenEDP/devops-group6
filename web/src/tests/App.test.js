@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from "react-router-dom";
 import { render, screen } from '@testing-library/react';
 
-import { mockPaintings } from '@features/paintings/mockData/mockPaintings.ts';
+import { mockAuctions } from '@features/paintings/mockData/mockAuctions.ts';
 import App from '../../../../../../../../tmp/App.js';
 
 describe('App Routing', () => {
@@ -16,11 +16,11 @@ describe('App Routing', () => {
         // Check for Gallery title
         expect(screen.getByTestId('gallery-title')).toBeInTheDocument();
         // Check that at least one painting card is rendered
-        expect(screen.getByTestId(`painting-card-${mockPaintings[0].id}`)).toBeInTheDocument();
+        expect(screen.getByTestId(`painting-card-${mockAuctions[0].id}`)).toBeInTheDocument();
     });
 
-    test('renders PaintingDetail page for valid painting ID', () => {
-        const painting = mockPaintings[0];
+    test('renders AuctionDetail page for valid painting ID', () => {
+        const painting = mockAuctions[0];
 
         render(
             <MemoryRouter initialEntries={[`/painting/${painting.id}`]}>
@@ -49,9 +49,9 @@ describe('App Routing', () => {
 });
 
 describe('App Navigation', () => {
-    test('clicking a painting navigates to PaintingDetail', async () => {
+    test('clicking a painting navigates to AuctionDetail', async () => {
         const user = userEvent.setup();
-        const painting = mockPaintings[0];
+        const painting = mockAuctions[0];
 
         render(
             <MemoryRouter initialEntries={['/']}>
@@ -71,7 +71,7 @@ describe('App Navigation', () => {
 
     test('back button navigates to Gallery', async () => {
         const user = userEvent.setup();
-        const painting = mockPaintings[0];
+        const painting = mockAuctions[0];
 
         render(
             <MemoryRouter initialEntries={[`/painting/${painting.id}`]}>
@@ -84,7 +84,7 @@ describe('App Navigation', () => {
         await user.click(screen.getByTestId('back-button'));
 
         expect(screen.getByTestId('gallery-title')).toBeInTheDocument();
-        expect(screen.getByTestId(`painting-card-${mockPaintings[0].id}`)).toBeInTheDocument();
+        expect(screen.getByTestId(`painting-card-${mockAuctions[0].id}`)).toBeInTheDocument();
     });
 
     test('navigation to unknown route shows NotFound and return button works', async () => {

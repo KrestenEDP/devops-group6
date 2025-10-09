@@ -1,4 +1,4 @@
-export type Painting = {
+export type Auction = {
     id: string;
     title: string;
     artist: string;

@@ -1,6 +1,6 @@
-import type {Painting} from "@customTypes/painting";
+import type {Auction} from "@customTypes/auction.ts";
 
-export const mockPaintings: Painting[] = [
+export const mockAuctions: Auction[] = [
     {
         id: "1",
         title: "Sunset Over the Valley",

@@ -30,8 +30,10 @@
       "@customTypes/*": ["types/*"],
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
-      "@routes/*": ["routes/*"]
-    }
+      "@routes/*": ["routes/*"],
+      "@context/*": ["context/*"],
+    },
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"]
 }

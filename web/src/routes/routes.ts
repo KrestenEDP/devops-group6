@@ -1,6 +1,6 @@
 export const ROUTES = {
     GALLERY: "/",
-    PAINTING_DETAIL: (id: string | number = ":paintingId") => `/painting/${id}`,
+    AUCTION_DETAIL: (id: string | number = ":auctionId") => `/auction/${id}`,
     LOGIN: "/login",
     CREATE_ACCOUNT: "/create-account",
     FORGOT_PASSWORD: "/forgot-password",

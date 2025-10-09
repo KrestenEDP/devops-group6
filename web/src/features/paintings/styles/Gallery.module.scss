@@ -29,18 +29,18 @@
     }
 }
 
-.paintingsGrid {
+.auctionsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
 }
 
-.paintingCardLink {
+.auctionCardLink {
     text-decoration: none;
     color: inherit;
 }
 
-.paintingCard {
+.auctionCard {
     @include shared.card;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -50,22 +50,22 @@
         transform: translateY(-4px);
     }
 
-    .paintingImageContainer {
+    .auctionImageContainer {
         aspect-ratio: 3/4;
         background: #f0f0f0;
         overflow: hidden;
     }
 
-    .paintingImage {
+    .auctionImage {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .paintingInfo {
+    .auctionInfo {
         padding: 1.5rem;
 
-        .paintingTitle {
+        .auctionTitle {
             font-size: 1.25rem;
             font-weight: bold;
             font-family: shared.$font-family-heading;
@@ -73,12 +73,12 @@
             color: shared.$color-text;
         }
 
-        .paintingArtist {
+        .auctionArtist {
             color: shared.$color-subtext;
             margin-bottom: 1rem;
         }
 
-        .paintingDetails {
+        .auctionDetails {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
@@ -139,7 +139,7 @@
 }
 
 @media (max-width: 768px) {
-    .paintingsGrid {
+    .auctionsGrid {
         grid-template-columns: 1fr;
     }
 

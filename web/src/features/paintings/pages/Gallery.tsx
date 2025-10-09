@@ -1,12 +1,17 @@
-import { useState } from "react";
-import { mockPaintings } from "@features/paintings/mockData/mockPaintings";
-import { PaintingCard } from "../components/PaintingCard";
-import type {Painting} from "@customTypes/painting";
+// src/features/paintings/Gallery.tsx
+import { useEffect } from "react";
+import { AuctionCard } from "../components/AuctionCard";
 import styles from "../styles/Gallery.module.scss";
+import { useAuctions } from "@context/AuctionsContext";
+import { mockAuctions } from "../mockData/mockAuctions";
 
 export function Gallery() {
-    // If you later fetch paintings from an API, replace mockPaintings with the API mockData and use setPaintings to update state
-    const [paintings] = useState<Painting[]>(mockPaintings);
+    const { auctions, setAuctions } = useAuctions();
+
+    useEffect(() => {
+        // Simulate fetching data from API
+        setAuctions(mockAuctions);
+    }, [setAuctions]);
 
     return (
         <div className={styles.galleryPage}>
@@ -18,9 +23,9 @@ export function Gallery() {
                     </p>
                 </section>
 
-                <div className={styles.paintingsGrid}>
-                    {paintings.map((painting) => (
-                        <PaintingCard key={painting.id} painting={painting} />
+                <div className={styles.auctionsGrid}>
+                    {auctions.map((auction) => (
+                        <AuctionCard key={auction.id} auction={auction} />
                     ))}
                 </div>
             </main>
