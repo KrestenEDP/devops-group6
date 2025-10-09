@@ -1,4 +1,3 @@
-// src/features/auctions/components/AuctionCard.tsx
 import { Link } from "react-router-dom";
 import { Users } from "lucide-react";
 import type { Auction } from "@customTypes/auction";

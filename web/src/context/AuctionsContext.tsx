@@ -1,26 +1,11 @@
-// context/AuctionsContext.tsx
-import React, { createContext, useContext, useState, type ReactNode } from "react";
-import type {Auction} from "@customTypes/auction.ts";
+import { createDataContext } from "./createDataContext";
+import type { Auction } from "@customTypes/auction.ts";
+import { mockAuctions } from "@features/paintings/mockData/mockAuctions";
 
-interface AuctionsContextProps {
-    auctions: Auction[];
-    setAuctions: React.Dispatch<React.SetStateAction<Auction[]>>;
-}
-
-const AuctionsContext = createContext<AuctionsContextProps | undefined>(undefined);
-
-export const AuctionsProvider = ({ children }: { children: ReactNode }) => {
-    const [auctions, setAuctions] = useState<Auction[]>([]);
-
-    return (
-        <AuctionsContext.Provider value={{ auctions, setAuctions }}>
-            {children}
-        </AuctionsContext.Provider>
-    );
+// Fake API for demonstration
+const fetchAuctions = async () => {
+    // Replace with real API call: await fetch("/api/auctions").then(res => res.json())
+    return new Promise<Auction[]>((resolve) => setTimeout(() => resolve(mockAuctions), 500));
 };
 
-export const useAuctions = () => {
-    const context = useContext(AuctionsContext);
-    if (!context) throw new Error("useAuctions must be used within AuctionsProvider");
-    return context;
-};
+export const { Provider: AuctionsProvider, useDataContext: useAuctions } = createDataContext<Auction>(fetchAuctions, "Auctions");

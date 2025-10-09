@@ -1,17 +1,13 @@
-// src/features/paintings/Gallery.tsx
-import { useEffect } from "react";
 import { AuctionCard } from "../components/AuctionCard";
 import styles from "../styles/Gallery.module.scss";
 import { useAuctions } from "@context/AuctionsContext";
-import { mockAuctions } from "../mockData/mockAuctions";
+import {Loading} from "@components/common/Loading/Loading.tsx";
 
 export function Gallery() {
-    const { auctions, setAuctions } = useAuctions();
+    const { state: { items: auctions, loading, error } } = useAuctions();
 
-    useEffect(() => {
-        // Simulate fetching data from API
-        setAuctions(mockAuctions);
-    }, [setAuctions]);
+    if (loading) return Loading("auctions");
+    if (error) return <p>Error loading auctions: {error}</p>;
 
     return (
         <div className={styles.galleryPage}>

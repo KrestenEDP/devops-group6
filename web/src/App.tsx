@@ -7,7 +7,7 @@ import { UserCreation } from "@features/auth/pages/UserCreation";
 import { ForgotPassword } from "@features/auth/pages/ForgotPassword";
 import { Artists } from "@features/artists/pages/Artists";
 import { ArtistDetail } from "@features/artists/pages/ArtistDetail";
-import { NotFound } from "./pages/NotFound/NotFound";
+import { NotFound } from "@components/common/NotFound/NotFound";
 import { ROUTES } from "./routes/routes";
 import "./styles/App.scss";
 import {UserProvider} from "./context/UserContext.tsx";

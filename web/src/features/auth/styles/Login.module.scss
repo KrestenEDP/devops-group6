@@ -1,9 +1,8 @@
-/* Login.module.scss */
-
 /* Pages */
 .loginPage,
 .userCreationPage,
 .forgotPasswordPage {
+    flex: 1;
     display: flex;
     flex-direction: column;
     min-height: 100vh;

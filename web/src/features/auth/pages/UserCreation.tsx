@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../routes/routes";
+import { ROUTES } from "@routes/routes.ts";
 import styles from "../styles/Login.module.scss";
 
 export function UserCreation() {

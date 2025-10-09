@@ -1,14 +1,17 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { mockArtists } from "@features/artists/mockData/mockArtists"; // Mock mockData
-import styles from "../styles/ArtistDetail.module.scss"; // SCSS module
-import type {Artist} from '@customTypes/artist.ts';
+import styles from "../styles/ArtistDetail.module.scss";
+import {useArtists} from "@context/ArtistsContext.tsx";
+import {Loading} from "@components/common/Loading/Loading.tsx";
 
 export function ArtistDetail() {
-    const { artistId } = useParams<{ artistId: string }>();
     const navigate = useNavigate();
+    const { artistId } = useParams<{ artistId: string }>();
+    const { state: { items: artists, loading, error } } = useArtists();
 
-    // Type-safe find
-    const artist: Artist | undefined = mockArtists.find(a => a.artistId === artistId);
+    if (loading) return Loading("artist");
+    if (error) return <p>Error loading artists: {error}</p>;
+
+    const artist = artists.find(a => a.id === artistId);
 
     if (!artist) {
         return (

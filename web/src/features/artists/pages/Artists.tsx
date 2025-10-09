@@ -1,19 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { mockArtists } from "@features/artists/mockData/mockArtists";
-import styles from "../styles/Artists.module.scss"; // SCSS module
 import { ROUTES } from "@routes/routes.ts";
+import {useArtists} from "@context/ArtistsContext";
+import styles from "../styles/Artists.module.scss";
 import type { Artist } from "@customTypes/artist.ts";
+import {Loading} from "@components/common/Loading/Loading.tsx";
 
 export function Artists() {
     const navigate = useNavigate();
+    const { state: { items: artists, loading, error } } = useArtists();
+
+    if (loading) return Loading("artists");
+    if (error) return <p>Error loading auctions: {error}</p>;
 
     return (
         <div className={styles.artistsList}>
-            {mockArtists.map(({ artistId, name, image }: Artist) => (
+            {artists.map(({ id, name, image }: Artist) => (
                 <div
-                    key={artistId}
+                    key={id}
                     className={styles.artistItem}
-                    onClick={() => navigate(ROUTES.ARTIST_DETAIL(artistId))}
+                    onClick={() => navigate(ROUTES.ARTIST_DETAIL(id))}
                 >
                     <img src={image} alt={name} className={styles.artistItemImage} />
                     <span className={styles.artistItemName}>{name}</span>

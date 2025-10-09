@@ -1,17 +1,20 @@
-// src/features/auctions/AuctionDetail.tsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuctions } from "@context/AuctionsContext";
 import styles from "../styles/AuctionDetail.module.scss";
 import {ROUTES} from "@routes/routes.ts";
 import {ArrowLeft, Info, User, Users} from "lucide-react";
 import {formatCurrency} from "@features/paintings/mockData/mockAuctions.ts";
+import {Loading} from "@components/common/Loading/Loading.tsx";
 
 export function AuctionDetail() {
     const { auctionId } = useParams<{ auctionId: string }>();
-    const { auctions } = useAuctions();
+    const { state: { items: auctions, loading, error } } = useAuctions();
     const navigate = useNavigate();
 
-    const auction = auctions.find((a) => a.id === auctionId);
+    if (loading) return Loading("auction");
+    if (error) return <p>Error loading auction: {error}</p>;
+
+    const auction = auctions.find(a => a.id === auctionId);
 
     if (!auction) {
         return (

@@ -8,6 +8,3 @@ export const ROUTES = {
     ARTISTS: "/artists",
     ARTIST_DETAIL: (id: string | number = ":artistId") => `/artists/${id}`,
 } as const;
-
-// Optional helper type (if you want autocompletion for route keys)
-export type RouteKeys = keyof typeof ROUTES;

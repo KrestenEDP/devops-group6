@@ -1,30 +1,11 @@
-// src/context/ArtistsContext.tsx
-import React, { createContext, useContext, useReducer } from "react";
-import type {Artist} from "@customTypes/artist";
+import { createDataContext } from "./createDataContext";
+import type { Artist } from "@customTypes/artist.ts";
+import { mockArtists } from "@features/artists/mockData/mockArtists";
 
-type State = { artists: Artist[] };
-type Action = { type: "SET_ARTISTS"; payload: Artist[] };
-
-const initialState: State = { artists: [] };
-
-const ArtistsContext = createContext<{ state: State; dispatch: React.Dispatch<Action> } | undefined>(undefined);
-
-function reducer(state: State, action: Action): State {
-    switch (action.type) {
-        case "SET_ARTISTS":
-            return { ...state, artists: action.payload };
-        default:
-            return state;
-    }
-}
-
-export const ArtistsProvider = ({ children }: { children: React.ReactNode }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    return <ArtistsContext.Provider value={{ state, dispatch }}>{children}</ArtistsContext.Provider>;
+// Fake API for demonstration
+const fetchArtists = async () => {
+    // Replace with real API call: await fetch("/api/artists").then(res => res.json())
+    return new Promise<Artist[]>((resolve) => setTimeout(() => resolve(mockArtists), 500));
 };
 
-export const useArtistsContext = () => {
-    const context = useContext(ArtistsContext);
-    if (!context) throw new Error("useArtistsContext must be used within ArtistsProvider");
-    return context;
-};
+export const { Provider: ArtistsProvider, useDataContext: useArtists } = createDataContext<Artist>(fetchArtists, "Artists");
