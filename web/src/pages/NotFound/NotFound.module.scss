@@ -1,0 +1,44 @@
+.notFoundPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #fafaf8, #f5f3f0);
+}
+
+.notFoundContent {
+    text-align: center;
+    padding: 2rem;
+}
+
+.notFoundTitle {
+    font-size: 6rem;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    color: #d4a574;
+    margin-bottom: 1rem;
+}
+
+.notFoundMessage {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.homeButton {
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #0a3d62, #1e5f8e);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(10, 61, 98, 0.25);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(10, 61, 98, 0.35);
+    }
+}

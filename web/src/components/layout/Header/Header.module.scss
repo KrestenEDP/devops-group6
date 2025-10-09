@@ -1,0 +1,91 @@
+.header {
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.headerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+}
+
+.headerNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logoIcon {
+    width: 48px;
+    height: 48px;
+    color: #d4a574;
+}
+
+.siteTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navButton {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.navButtonGhost {
+    background: transparent;
+    color: black;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+        transform: translateY(-1px);
+    }
+}
+
+.navButtonPrimary {
+    background: linear-gradient(135deg, #0a3d62, #1e5f8e);
+    color: white;
+    box-shadow: 0 4px 12px rgba(10, 61, 98, 0.25);
+
+    &:hover {
+        box-shadow: 0 6px 20px rgba(10, 61, 98, 0.35);
+        transform: translateY(-1px);
+    }
+}
+
+.buttonIcon {
+    width: 16px;
+    height: 16px;
+}

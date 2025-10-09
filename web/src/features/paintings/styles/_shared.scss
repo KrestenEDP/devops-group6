@@ -1,0 +1,30 @@
+/* _shared.scss */
+$font-family-heading: 'Playfair Display', serif;
+$color-text: #1a1a1a;
+$color-subtext: #666;
+$color-primary: #d4a574;
+$color-gradient-primary: linear-gradient(135deg, #d4a574, #e6c8a8);
+$color-gradient-bid-card: linear-gradient(135deg, #0a3d62, #1e5f8e);
+
+body {
+  font-family: sans-serif;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Mixins instead of extend */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

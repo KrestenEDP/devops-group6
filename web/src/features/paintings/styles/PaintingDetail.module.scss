@@ -1,0 +1,231 @@
+@use './_shared' as shared;
+
+.detailPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fafaf8, #f5f3f0);
+}
+
+.detailContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.notFound {
+    @include shared.flex-center;
+    font-size: 1.5rem;
+    color: shared.$color-subtext;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: shared.$color-subtext;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+        color: shared.$color-text;
+        transform: translateX(-4px);
+    }
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.imageSection {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.paintingFrame {
+    @include shared.card;
+    padding: 1rem;
+}
+
+.paintingFullImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .titleSection {
+        margin-bottom: 0.5rem;
+
+        .paintingName {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: shared.$font-family-heading;
+            margin-bottom: 0.5rem;
+            color: shared.$color-text;
+        }
+
+        .artistName {
+            font-size: 1.25rem;
+            color: shared.$color-subtext;
+        }
+    }
+
+    .bidCard {
+        @include shared.card;
+        padding: 1.5rem;
+
+        &.primaryCard {
+            background: shared.$color-gradient-bid-card;
+            color: white;
+        }
+
+        .bidHeader {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            .bidCurrent {
+                .label {
+                    font-size: 0.875rem;
+                    opacity: 0.9;
+                    margin-bottom: 0.25rem;
+                }
+                .amount {
+                    font-size: 2rem;
+                    font-weight: bold;
+                }
+            }
+
+            .timeLeft {
+                .label {
+                    font-size: 0.875rem;
+                    opacity: 0.9;
+                    margin-bottom: 0.25rem;
+                }
+            }
+        }
+
+        .bidCount {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .bidForm {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+
+            .bidInput {
+                padding: 0.75rem;
+                background: white;
+                color: shared.$color-text;
+                border: 1px solid #e5e5e5;
+                border-radius: 6px;
+                font-size: 1rem;
+
+                &:focus {
+                    border-color: shared.$color-primary;
+                    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+                }
+            }
+
+            .placeBidButton {
+                padding: 0.875rem;
+                background: shared.$color-gradient-primary;
+                color: shared.$color-text;
+                border-radius: 6px;
+                font-size: 1rem;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+
+                &:hover {
+                    transform: scale(1.02);
+                    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+                }
+            }
+        }
+    }
+
+    .detailsCard,
+    .artistCard {
+        @include shared.card;
+        padding: 1.5rem;
+    }
+
+    .cardTitle {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: shared.$font-family-heading;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: shared.$color-text;
+    }
+
+    .detailsList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .detailItem {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .detailLabel {
+                font-weight: 600;
+                color: shared.$color-subtext;
+            }
+
+            .detailValue {
+                color: shared.$color-text;
+            }
+        }
+    }
+
+    .artistBio {
+        line-height: 1.6;
+        color: shared.$color-subtext;
+    }
+}
+
+@media (max-width: 768px) {
+    .detailGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .imageSection {
+        position: static;
+    }
+
+    .paintingName {
+        font-size: 1.75rem;
+    }
+
+    .bidHeader {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
