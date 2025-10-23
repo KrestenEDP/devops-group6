@@ -29,14 +29,17 @@ export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string)
     const Provider = ({ children }: { children: React.ReactNode }) => {
         const [state, dispatch] = useReducer(reducer, initialState);
 
+        const fetchData = () => {
+            dispatch({ type: "SET_LOADING", payload: true });
+            apiFetch()
+                .then((data) => dispatch({ type: "SET_ITEMS", payload: data }))
+                .catch((err) => dispatch({ type: "SET_ERROR", payload: err.message || "Error fetching " + name }));
+        }
+
         useEffect(() => {
-            if (state.items.length === 0) {
-                dispatch({ type: "SET_LOADING", payload: true });
-                apiFetch()
-                    .then((data) => dispatch({ type: "SET_ITEMS", payload: data }))
-                    .catch((err) => dispatch({ type: "SET_ERROR", payload: err.message || "Error fetching " + name }));
-            }
-        }, []);
+            if (state.items.length === 0)
+                fetchData();
+        }, [state.items.length]);
 
         return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
     };

@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
+// Only local login so far
+
 export interface User {
     id: string;
     name: string;

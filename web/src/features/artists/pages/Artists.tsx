@@ -10,7 +10,7 @@ export function Artists() {
     const { state: { items: artists, loading, error } } = useArtists();
 
     if (loading) return Loading("artists");
-    if (error) return <p>Error loading auctions: {error}</p>;
+    if (error) return <p>Error loading artists: {error}</p>;
 
     return (
         <div className={styles.artistsList}>
