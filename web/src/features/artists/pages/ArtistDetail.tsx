@@ -2,11 +2,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "../styles/ArtistDetail.module.scss";
 import {useArtists} from "@context/ArtistsContext.tsx";
 import {Loading} from "@components/common/Loading/Loading.tsx";
+import React from "react";
 
 export function ArtistDetail() {
     const navigate = useNavigate();
     const { artistId } = useParams<{ artistId: string }>();
-    const { state: { items: artists, loading, error } } = useArtists();
+    const { state: { items: artists, loading, error }, load } = useArtists();
+
+    // Load data on component mount
+    React.useEffect(() => {
+        load();
+    }, [load]);
 
     if (loading) return Loading("artist");
     if (error) return <p>Error loading artists: {error}</p>;

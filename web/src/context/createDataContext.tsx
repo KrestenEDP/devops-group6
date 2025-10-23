@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 
 export interface DataState<T> {
     items: T[];
@@ -13,7 +13,11 @@ export type DataAction<T> =
 
 
 export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string) {
-    const Context = createContext<{ state: DataState<T>; dispatch: React.Dispatch<DataAction<T>> } | undefined>(undefined);
+    const Context = createContext<{
+        state: DataState<T>;
+        dispatch: React.Dispatch<DataAction<T>>;
+        load: () => void;
+    } | undefined>(undefined);
 
     const initialState: DataState<T> = { items: [], loading: false, error: null };
 
@@ -36,12 +40,13 @@ export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string)
                 .catch((err) => dispatch({ type: "SET_ERROR", payload: err.message || "Error fetching " + name }));
         }
 
-        useEffect(() => {
-            if (state.items.length === 0)
+        const load = () => {
+            if (state.items.length === 0) {
                 fetchData();
-        }, [state.items.length]);
+            }
+        };
 
-        return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
+        return <Context.Provider value={{ state, dispatch, load }}>{children}</Context.Provider>;
     };
 
     const useDataContext = () => {

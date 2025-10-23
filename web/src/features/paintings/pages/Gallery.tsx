@@ -2,9 +2,15 @@ import { AuctionCard } from "../components/AuctionCard";
 import styles from "../styles/Gallery.module.scss";
 import { useAuctions } from "@context/AuctionsContext";
 import {Loading} from "@components/common/Loading/Loading.tsx";
+import React from "react";
 
 export function Gallery() {
-    const { state: { items: auctions, loading, error } } = useAuctions();
+    const { state: { items: auctions, loading, error }, load } = useAuctions();
+
+    // Load data on component mount
+    React.useEffect(() => {
+        load();
+    }, [load]);
 
     if (loading) return Loading("auctions");
     if (error) return <p>Error loading auctions: {error}</p>;

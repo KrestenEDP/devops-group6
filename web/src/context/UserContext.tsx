@@ -31,14 +31,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser(newUser);
         try {
             localStorage.setItem("user", JSON.stringify(newUser));
-        } catch {}
+        } catch { /* empty */ }
     };
 
     const logout = () => {
         setUser(null);
         try {
             localStorage.removeItem("user");
-        } catch {}
+        } catch { /* empty */ }
     };
 
     const isLoggedIn = !!user;

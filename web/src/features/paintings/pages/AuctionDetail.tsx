@@ -5,11 +5,17 @@ import {ROUTES} from "@routes/routes.ts";
 import {ArrowLeft, Info, User, Users} from "lucide-react";
 import {formatCurrency} from "@features/paintings/mockData/mockAuctions.ts";
 import {Loading} from "@components/common/Loading/Loading.tsx";
+import React from "react";
 
 export function AuctionDetail() {
     const { auctionId } = useParams<{ auctionId: string }>();
-    const { state: { items: auctions, loading, error } } = useAuctions();
     const navigate = useNavigate();
+    const { state: { items: auctions, loading, error }, load } = useAuctions();
+
+    // Load data on component mount
+    React.useEffect(() => {
+        load();
+    }, [load]);
 
     if (loading) return Loading("auction");
     if (error) return <p>Error loading auction: {error}</p>;

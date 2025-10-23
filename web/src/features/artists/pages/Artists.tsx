@@ -4,10 +4,16 @@ import {useArtists} from "@context/ArtistsContext";
 import styles from "../styles/Artists.module.scss";
 import type { Artist } from "@customTypes/artist.ts";
 import {Loading} from "@components/common/Loading/Loading.tsx";
+import React from "react";
 
 export function Artists() {
     const navigate = useNavigate();
-    const { state: { items: artists, loading, error } } = useArtists();
+    const { state: { items: artists, loading, error }, load } = useArtists();
+
+    // Load data on component mount
+    React.useEffect(() => {
+        load();
+    }, [load]);
 
     if (loading) return Loading("artists");
     if (error) return <p>Error loading artists: {error}</p>;
