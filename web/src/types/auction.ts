@@ -8,6 +8,5 @@ export type Auction = {
     bidCount: number;
     medium: string;
     dimensions: string;
-    condition: string;
     artistBio: string;
 };

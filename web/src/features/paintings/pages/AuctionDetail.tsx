@@ -100,10 +100,6 @@ export function AuctionDetail() {
                                     <span className={styles.detailLabel}>Dimensions</span>
                                     <span className={styles.detailValue}>{auction.dimensions}</span>
                                 </div>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>Condition</span>
-                                    <span className={styles.detailValue}>{auction.condition}</span>
-                                </div>
                             </div>
                         </div>
 

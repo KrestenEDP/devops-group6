@@ -11,7 +11,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 23,
         medium: "Oil on canvas",
         dimensions: "73.7 cm × 92.1 cm",
-        condition: "Excellent",
         artistBio: "Claude Monet was a founder of French Impressionist painting, and the most consistent and prolific practitioner of the movement's philosophy."
     },
     {
@@ -24,7 +23,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 45,
         medium: "Oil on canvas",
         dimensions: "44.5 cm × 39 cm",
-        condition: "Very Good",
         artistBio: "Johannes Vermeer was a Dutch Baroque Period painter who specialized in domestic interior scenes of middle class life."
     },
     {
@@ -37,7 +35,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 31,
         medium: "Watercolor on paper",
         dimensions: "30.5 cm × 48.7 cm",
-        condition: "Good",
         artistBio: "Joseph Mallord William Turner was an English Romantic painter, printmaker and watercolourist, known for his expressive colourisation."
     },
     {
@@ -50,7 +47,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 28,
         medium: "Oil and tempera on canvas",
         dimensions: "140 cm × 201 cm",
-        condition: "Excellent",
         artistBio: "Wassily Kandinsky was a Russian painter and art theorist, generally credited as the pioneer of abstract art."
     },
     {
@@ -63,7 +59,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 19,
         medium: "Oil on canvas",
         dimensions: "81 cm × 92 cm",
-        condition: "Very Good",
         artistBio: "Claude Monet's garden at Giverny is the inspiration for many of his most famous paintings, particularly his water lily series."
     },
     {
@@ -76,7 +71,6 @@ export const mockAuctions: Auction[] = [
         bidCount: 26,
         medium: "Oil on canvas",
         dimensions: "65 cm × 81 cm",
-        condition: "Good",
         artistBio: "Paul Cézanne was a French artist and Post-Impressionist painter whose work laid the foundations of modern art."
     },
 ];
