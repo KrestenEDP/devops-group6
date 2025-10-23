@@ -10,18 +10,39 @@ interface UserContextProps {
     user: User | null;
     login: (user: User) => void;
     logout: () => void;
+    isLoggedIn: boolean;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null>(() => {
+        try {
+            const raw = localStorage.getItem("user");
+            return raw ? (JSON.parse(raw) as User) : null;
+        } catch {
+            return null;
+        }
+    });
 
-    const login = (newUser: User) => setUser(newUser);
-    const logout = () => setUser(null);
+    const login = (newUser: User) => {
+        setUser(newUser);
+        try {
+            localStorage.setItem("user", JSON.stringify(newUser));
+        } catch {}
+    };
+
+    const logout = () => {
+        setUser(null);
+        try {
+            localStorage.removeItem("user");
+        } catch {}
+    };
+
+    const isLoggedIn = !!user;
 
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
+        <UserContext.Provider value={{ user, login, logout, isLoggedIn }}>
             {children}
         </UserContext.Provider>
     );

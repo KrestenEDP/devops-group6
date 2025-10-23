@@ -7,4 +7,5 @@ export const ROUTES = {
     NOT_FOUND: "*",
     ARTISTS: "/artists",
     ARTIST_DETAIL: (id: string | number = ":artistId") => `/artists/${id}`,
+    PROFILE: "/profile",
 } as const;

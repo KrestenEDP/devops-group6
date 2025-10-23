@@ -1,10 +1,13 @@
 import {Link, useNavigate} from "react-router-dom";
-import { User } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
 import { ROUTES } from "@routes/routes.ts";
 import styles from "./Header.module.scss";
+import { useUser } from "@context/UserContext.tsx";
 
 export function Header() {
     const navigate = useNavigate();
+
+    const { user, isLoggedIn, logout } = useUser();
 
     return (
         <header className={styles.header}>
@@ -28,13 +31,29 @@ export function Header() {
                         >
                             About artists
                         </button>
-                        <button
-                            onClick={() => navigate(ROUTES.LOGIN)}
-                            className={`${styles.navButton} ${styles.navButtonPrimary}`}
-                        >
-                            <User className={styles.buttonIcon} size={16} strokeWidth={2} />
-                            Sign In
-                        </button>
+
+                        {isLoggedIn ? (
+                            <>
+                                <span className={styles.userLabel}></span>
+                                <button
+                                    onClick={() => {
+                                        navigate(ROUTES.PROFILE);
+                                    }}
+                                    className={`${styles.navButton} ${styles.navButtonPrimary}`}
+                                >
+                                    <UserIcon className={styles.buttonIcon} size={16} strokeWidth={2} />
+                                    Profile
+                                </button>
+                            </>
+                        ) : (
+                            <button
+                                onClick={() => navigate(ROUTES.LOGIN)}
+                                className={`${styles.navButton} ${styles.navButtonPrimary}`}
+                            >
+                                <UserIcon className={styles.buttonIcon} size={16} strokeWidth={2} />
+                                Sign In
+                            </button>
+                        )}
                     </div>
                 </nav>
             </div>

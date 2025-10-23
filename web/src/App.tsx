@@ -13,6 +13,7 @@ import "./styles/App.scss";
 import {UserProvider} from "./context/UserContext.tsx";
 import {ArtistsProvider} from "./context/ArtistsContext.tsx";
 import {AuctionsProvider} from "./context/AuctionsContext.tsx";
+import {Profile} from "@features/profile/pages/Profile.tsx";
 
 export function App() {
     return (
@@ -29,6 +30,7 @@ export function App() {
                             <Route path={ROUTES.ARTISTS} element={<Artists />} />
                             <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
                             <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+                            <Route path={ROUTES.PROFILE} element={<Profile />} />
                         </Routes>
                     </Layout>
                 </AuctionsProvider>
