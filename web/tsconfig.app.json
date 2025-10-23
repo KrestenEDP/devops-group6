@@ -25,13 +25,13 @@
     "noUncheckedSideEffectImports": true,
 
     /* Path aliases */
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@customTypes/*": ["types/*"],
-      "@components/*": ["components/*"],
-      "@features/*": ["features/*"],
-      "@routes/*": ["routes/*"],
-      "@context/*": ["context/*"],
+      "@customTypes/*": ["src/types/*"],
+      "@components/*": ["src/components/*"],
+      "@features/*": ["src/features/*"],
+      "@routes/*": ["src/routes/*"],
+      "@context/*": ["src/context/*"]
     },
     "allowSyntheticDefaultImports": true
   },

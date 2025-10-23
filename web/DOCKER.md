@@ -21,7 +21,7 @@ Run the development server with hot reloading:
 docker-compose watch
 
 # Or using Docker Compose without watch
-docker-compose up web
+docker-compose up web-dev
 
 # Or build and run manually
 docker build -f Dockerfile.dev -t web-dev .
