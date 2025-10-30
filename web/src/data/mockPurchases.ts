@@ -1,5 +1,3 @@
-import { mockAuctions } from "./mockAuctions";
-
 export const mockPurchases = [
   {
     id: "p1",

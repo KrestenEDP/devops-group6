@@ -1,4 +1,4 @@
-import { useEffect, createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 // Only local login so far
 

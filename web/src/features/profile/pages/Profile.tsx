@@ -57,8 +57,6 @@ export function Profile() {
 
 	// ✅ Find purchases for this user
 	const userPurchases = mockPurchases.filter((p) => p.userId === user?.id);
-	console.log("User Purchases:", userPurchases);
-	console.log("User:", user);
 	
 	return (
 		<div className={styles.profilePage}>
