@@ -15,6 +15,7 @@ export function Profile() {
 	const [message, setMessage] = useState<string | null>(null);
 	const [isArtist, setIsArtist] = useState(user?.isArtist ?? false);
 
+
 	if (!isLoggedIn) {
 		return (
 			<div className={styles.profilePage}>
@@ -38,7 +39,10 @@ export function Profile() {
 		}
 
 		// Update the user in context (and localStorage via context)
-		login({ id: user!.id, name, email, isArtist });
+		login({
+			id: user!.id, name, email,
+			isArtist: user!.isArtist,
+		});
 		setMessage("Profile updated.");
 
 		setIsArtist(name === "test test");
