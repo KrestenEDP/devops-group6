@@ -5,7 +5,7 @@ export function NewArt() {
 	const [title, setTitle] = useState("");
 	const [medium, setMedium] = useState("");
 	const [condition, setCondition] = useState("");
-	const [price, setPrice] = useState("");
+	const [price, setPrice] = useState<number | "">("");
 
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const previewRef = useRef<string | null>(null);
@@ -91,8 +91,14 @@ export function NewArt() {
 					<label className={styles.label}>Medium:</label>
 					<input
 						className={styles.input}
+                        type="text"
 						value={medium}
-						onChange={(e) => setMedium(e.target.value)}
+						onChange={(e) => {
+                            const t = e.target.value;
+                            if (t.length <= 30 && !/\d/.test(t)) {
+                                setMedium(e.target.value)}
+                            }
+                        }
 						placeholder="e.g. Oil on canvas"
 					/>
 
@@ -107,9 +113,19 @@ export function NewArt() {
 					<label className={styles.label}>Secret Price:</label>
 					<input
 						className={styles.input}
+						type="number"
+						min="0"
 						value={price}
-						onChange={(e) => setPrice(e.target.value)}
-						placeholder="100.000Kr"
+						onChange={(e) => {
+							const v = e.target.value;
+							if (v === "") {
+								setPrice("");
+								return;
+							}
+							const n = Number(v);
+							if (!Number.isNaN(n)) setPrice(n);
+						}}
+						placeholder="100000"
 					/>
 
 					<button className={styles.submitBtn} type="submit">Submit</button>
