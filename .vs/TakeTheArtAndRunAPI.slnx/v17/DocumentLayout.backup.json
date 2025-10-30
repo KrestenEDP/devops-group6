@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\tests\\auctionscontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\tests\\auctionscontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -56,26 +56,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AuctionsController.cs",
               "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
               "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
               "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
               "RelativeToolTip": "TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAWwDAAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAmwHYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T14:13:24.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AuctionsControllerTests.cs",
               "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Tests\\AuctionsControllerTests.cs",
               "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Tests\\AuctionsControllerTests.cs",
               "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Tests\\AuctionsControllerTests.cs",
               "RelativeToolTip": "TakeTheArtAndRunAPI\\Tests\\AuctionsControllerTests.cs",
-              "ViewState": "AgIAANIAAAAAAAAAAAAWwO4AAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAKAAAAAAAAAAAAAAAK0AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-30T14:13:14.902Z",
               "EditorCaption": ""

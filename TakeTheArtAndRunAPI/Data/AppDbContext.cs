@@ -19,5 +19,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .WithMany()
             .HasForeignKey(t => t.AuctionId)
             .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

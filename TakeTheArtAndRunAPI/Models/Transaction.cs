@@ -6,7 +6,7 @@ public class Transaction
     public string UserId { get; private set; } = string.Empty;
     public Guid AuctionId { get; private set; }
 
-    public Auction Auction { get; private set; } = null!;
+    public Auction? Auction { get; private set; }
 
     public decimal AmountPaid { get; private set; }
     public DateTime PurchasedAt { get; private set; } = DateTime.UtcNow;

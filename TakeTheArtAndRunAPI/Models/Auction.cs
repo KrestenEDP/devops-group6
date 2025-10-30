@@ -30,7 +30,7 @@ public class Auction
         ArtistBio = artistBio;
     }
 
-    public Boolean PlaceBid(string userId, decimal bidAmount, out bool sold)
+    public Boolean PlaceBid(decimal bidAmount, out bool sold)
     {
         bidAmount = decimal.Round(bidAmount, 2);
         sold = false;
@@ -46,6 +46,6 @@ public class Auction
             IsSold = true;
             sold = true;
         }
-        return false;
+        return true;
     }
 }
