@@ -1,51 +1,50 @@
-﻿namespace TakeTheArtAndRunAPI.Models;
+﻿using System.Security.Cryptography;
+
+namespace TakeTheArtAndRunAPI.Models;
 
 public class Auction
 {
     public Guid Id { get; private set; } = Guid.NewGuid();
 
-    public string Title { get; private set; } = string.Empty;
-    public string Artist { get; private set; } = string.Empty;
-    public string ImageUrl { get; private set; } = string.Empty;
-    public decimal Limit { get; private set; }
+    public Guid ArtistId { get; private set; }
+    public string Title { get; set; } = string.Empty;
+    public string ImageUrl { get; set; } = string.Empty;
+    public decimal Limit { get; set; }
     public decimal HighestBid { get; private set; } = 0;
     public int BidCount { get; private set; } = 0;
-    public string Medium { get; private set; } = string.Empty;
-    public string Dimensions { get; private set; } = string.Empty;
-    public string ArtistBio { get; private set; } = string.Empty;
-    public Boolean isSold { get; set; } = false;
+    public string Medium { get; set; } = string.Empty;
+    public string Dimensions { get; set; } = string.Empty;
+    public string ArtistBio { get; set; } = string.Empty;
+    public Boolean IsSold { get; private set; } = false;
 
-    public Auction(string title, string artist, string imageUrl, decimal limit, string medium, string dimensions, string artistBio)
+    private Auction() { }
+
+    public Auction(string title, Guid artistId, string imageUrl, decimal limit, string medium, string dimensions, string artistBio)
     {
         Title = title;
-        Artist = artist;
+        ArtistId = artistId;
         ImageUrl = imageUrl;
-        Limit = limit;
+        Limit = decimal.Round(limit, 2);
         Medium = medium;
         Dimensions = dimensions;
         ArtistBio = artistBio;
     }
 
-    public Boolean placeBid(decimal bidAmount)
+    public Boolean PlaceBid(string userId, decimal bidAmount, out bool sold)
     {
-        if (isSold)
-        {
+        bidAmount = decimal.Round(bidAmount, 2);
+        sold = false;
+
+        if (IsSold || bidAmount <= HighestBid)
             return false;
-        }
+
+        HighestBid = bidAmount;
+        BidCount += 1;
+
         if (bidAmount >= Limit)
         {
-            // Auction is sold
-            // TODO: Log the auction and something more
-            isSold = true;
-            HighestBid = bidAmount;
-            BidCount += 1;
-            return true;
-        }
-        if (bidAmount > HighestBid)
-        {
-            HighestBid = bidAmount;
-            BidCount += 1;
-            return true;
+            IsSold = true;
+            sold = true;
         }
         return false;
     }
