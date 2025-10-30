@@ -19,30 +19,14 @@ interface UserContextProps {
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-
-    // ✅ Hardcoded default user
-    const defaultUser: User = {
-		id: "1",
-		name: "John Doe",
-		email: "john@example.com",
-		isArtist: false,
-	};
-
-	const [user, setUser] = useState<User | null>(null);
-
-	// Load from localStorage once (if it exists)
-	useEffect(() => {
-		try {
-			const raw = localStorage.getItem("user");
-			if (raw) {
-				setUser(JSON.parse(raw));
-			} else {
-				localStorage.setItem("user", JSON.stringify(defaultUser));
-			}
-		} catch {
-			localStorage.setItem("user", JSON.stringify(defaultUser));
-		}
-	}, []);
+    const [user, setUser] = useState<User | null>(() => {
+        try {
+            const raw = localStorage.getItem("user");
+            return raw ? (JSON.parse(raw) as User) : null;
+        } catch {
+            return null;
+        }
+    });
 
     const login = (newUser: User) => {
         setUser(newUser);
