@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\controllers\\artistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\controllers\\artistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|c:\\users\\jonat\\documents\\github\\devops-group6\\taketheartandrunapi\\models\\auction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6854362-7E2A-FF42-08A6-888D18265387}|TakeTheArtAndRunAPI\\TakeTheArtAndRunAPI.csproj|solutionrelative:taketheartandrunapi\\models\\auction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\appsettings.json",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-23T17:51:36.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:49:15.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuctionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Controllers\\AuctionsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:48:30.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArtistsController.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\ArtistsController.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Controllers\\ArtistsController.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Controllers\\ArtistsController.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Controllers\\ArtistsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:48:25.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Auction.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Models\\Auction.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Models\\Auction.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Models\\Auction.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Models\\Auction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:47:50.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Artist.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Models\\Artist.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Models\\Artist.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Models\\Artist.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Models\\Artist.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:47:50.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TakeTheArtAndRunAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\Jonat\\Documents\\GitHub\\devops-group6\\TakeTheArtAndRunAPI\\Program.cs",
+              "RelativeToolTip": "TakeTheArtAndRunAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:31:41.255Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
