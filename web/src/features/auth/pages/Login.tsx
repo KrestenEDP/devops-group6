@@ -10,6 +10,7 @@ export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState<string | null>(null);
+    const [isArtist] = useState(false);
 
     const { login } = useUser();
 
@@ -30,7 +31,7 @@ export function Login() {
 
         // Simulate success without calling any backend if test and test.
         if (email === "test" && password === "test") {
-            const user = { id: "1", name: "Test User", email };
+            const user = { id: "1", name: "Test User", email, isArtist };
             // update global user state (and persist to localStorage)
             login(user);
             setMessage("Succesfully logged in. Redirecting to gallery...");

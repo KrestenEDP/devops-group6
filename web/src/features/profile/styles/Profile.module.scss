@@ -3,7 +3,8 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   padding: 40px 16px;
 }
 
@@ -89,4 +90,22 @@
 }
 .dangerBtn:hover {
   background: #c0392b;
+}
+
+.greenBtn {
+  background: #59e73c;
+  color: #000000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(231,76,60,0.08);
+  transition: background 0.2s;
+}
+
+.buttonContainer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

@@ -6,6 +6,7 @@ export interface User {
     id: string;
     name: string;
     email: string;
+    isArtist: boolean;
 }
 
 interface UserContextProps {
@@ -44,7 +45,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const isLoggedIn = !!user;
 
     return (
-        <UserContext.Provider value={{ user, login, logout, isLoggedIn }}>
+        <UserContext.Provider value={{ user, login, logout, isLoggedIn}}>
             {children}
         </UserContext.Provider>
     );

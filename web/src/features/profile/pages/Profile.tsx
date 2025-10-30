@@ -11,6 +11,9 @@ export function Profile() {
 	const [name, setName] = useState(user?.name ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
+	const [isArtist, setIsArtist] = useState(user?.isArtist ?? false);
+
+
 
 	if (!isLoggedIn) {
 		return (
@@ -30,8 +33,15 @@ export function Profile() {
 		}
 
 		// Update the user in context (and localStorage via context)
-		login({ id: user!.id, name, email });
+		login({ id: user!.id, name, email, isArtist });
 		setMessage("Profile updated.");
+
+		if(name == "test test") {
+			setIsArtist(true);
+		} else {
+			setIsArtist(false);
+		}
+		
 		setTimeout(() => setMessage(null), 2000);
 	}
 
@@ -75,6 +85,11 @@ export function Profile() {
 					{message && <p role="status">{message}</p>}
 				</div>
 			</div>
+			{isArtist && (
+			<div className={styles.buttonContainer}>
+				<button className={styles.greenBtn} onClick={() => { navigate(ROUTES.NEW_ART); }}>New Auction</button>
+			</div>
+			)}
 		</div>
 	);
 }

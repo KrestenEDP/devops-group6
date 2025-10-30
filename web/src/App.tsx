@@ -14,6 +14,7 @@ import {UserProvider} from "./context/UserContext.tsx";
 import {ArtistsProvider} from "./context/ArtistsContext.tsx";
 import {AuctionsProvider} from "./context/AuctionsContext.tsx";
 import {Profile} from "@features/profile/pages/Profile.tsx";
+import { NewArt } from "@features/paintings/pages/NewArt.tsx";
 
 export function App() {
     return (
@@ -31,6 +32,7 @@ export function App() {
                             <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
                             <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                             <Route path={ROUTES.PROFILE} element={<Profile />} />
+                            <Route path={ROUTES.NEW_ART} element={<NewArt />} />
                         </Routes>
                     </Layout>
                 </AuctionsProvider>
