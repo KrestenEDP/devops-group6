@@ -34,7 +34,34 @@ public class AuthController(
 
         await userManager.AddToRoleAsync(user, dto.Role.ToString());
 
-        return Ok(new { message = "User registered successfully." });
+        var claims = new[]
+    {
+        new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+        new Claim("role", user.Role.ToString()),
+        new Claim(ClaimTypes.NameIdentifier, user.Id)
+    };
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+            expires: DateTime.Now.AddHours(2),
+            signingCredentials: creds,
+            claims: claims
+        );
+
+        var userDto = new
+        {
+            user.Id,
+            user.Email,
+            Role = user.Role.ToString(),
+            Transactions = new List<object>()
+        };
+
+        return Ok(new
+        {
+            token = new JwtSecurityTokenHandler().WriteToken(token),
+            user = userDto
+        });
     }
 
     [HttpPost("login")]
@@ -73,15 +100,17 @@ public class AuthController(
                 t.Id,
                 t.AmountPaid,
                 t.PurchasedAt,
-                Auction = new
-                {
-                    t.Auction.Id,
-                    t.Auction.Title,
-                    t.Auction.ImageUrl,
-                    t.Auction.HighestBid,
-                    t.Auction.Medium,
-                    t.Auction.Dimensions
-                }
+                Auction = t.Auction is not null
+                    ? new
+                    {
+                        t.Auction.Id,
+                        t.Auction.Title,
+                        t.Auction.ImageUrl,
+                        t.Auction.HighestBid,
+                        t.Auction.Medium,
+                        t.Auction.Dimensions
+                    }
+                    : null
             })
         };
 
