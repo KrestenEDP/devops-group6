@@ -34,7 +34,8 @@ public class ArtistsController(AppDbContext context, UserManager<User> userManag
         var artist = new Artist
         {
             Name = dto.Name,
-            Bio = dto.Bio
+            Bio = dto.Bio,
+            UserId = dto.UserId
         };
 
         context.Artists.Add(artist);

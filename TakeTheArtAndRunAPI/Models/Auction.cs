@@ -7,6 +7,7 @@ public class Auction
     public Guid Id { get; private set; } = Guid.NewGuid();
 
     public Guid ArtistId { get; private set; }
+    public Artist? Artist { get; private set; } // navigation
     public string Title { get; set; } = string.Empty;
     public string ImageUrl { get; set; } = string.Empty;
     public decimal Limit { get; set; }

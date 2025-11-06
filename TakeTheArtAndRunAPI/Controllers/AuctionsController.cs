@@ -29,8 +29,7 @@ public class AuctionsController(AppDbContext context) : ControllerBase
     }
 
     // GET /api/auctions/{id}
-    [HttpGet]
-    [Route("{id}")]
+    [HttpGet("{id}", Name = "GetAuctionById")]
     public async Task<ActionResult<AuctionReadDto>> GetAuctionByIdAsync(Guid id)
     {
         var auction = await _context.Auctions
@@ -48,11 +47,13 @@ public class AuctionsController(AppDbContext context) : ControllerBase
     [Authorize(Policy = Policies.Artist)]
     public async Task<ActionResult<AuctionReadDto>> CreateAuctionAsync([FromBody] AuctionWriteDto dto)
     {
-        var artistId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        var artist = await _context.Artists.FirstOrDefaultAsync(a => a.UserId == userId);
+        if (artist == null) return Forbid("You must be an artist to create an auction.");
         var newAuction = new Auction
         (
             title: dto.Title,
-            artistId: artistId,
+            artistId: artist.Id,
             imageUrl: dto.ImageUrl,
             limit: dto.Limit,
             medium: dto.Medium,
@@ -64,7 +65,7 @@ public class AuctionsController(AppDbContext context) : ControllerBase
         await _context.SaveChangesAsync();
 
         var readDto = newAuction.ToDto();
-        return CreatedAtAction(nameof(GetAuctionByIdAsync), new { id = newAuction.Id }, readDto);
+        return CreatedAtAction("GetAuctionById", new { id = newAuction.Id }, readDto);
     }
 
     // PUT /api/auctions/{id} - only the artist who created it
@@ -114,8 +115,10 @@ public class AuctionsController(AppDbContext context) : ControllerBase
             _context.Transactions.Add(transaction);
         }
 
+        var message = sold ? "Bid accepted! The auction is now sold." : "Bid accepted!";
+
         await _context.SaveChangesAsync();
-        return Ok();
+        return Ok(message);
     }
 }
 

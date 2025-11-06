@@ -6,5 +6,8 @@ public class Artist
     public string Name { get; set; } = String.Empty;
     public string Bio { get; set; } = String.Empty;
 
+    public string UserId { get; set; } = string.Empty;
+    public User? User { get; set; }
+
     public List<Auction> Auctions { get; set; } = [];
 }
