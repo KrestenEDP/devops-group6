@@ -20,7 +20,7 @@ export function NewArt() {
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
-		console.log({ title, medium, condition, price });
+		console.log({ title, medium, dimensions, condition, price });
 		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, dimensions ,condition, price }, null, 2));
 		//TODO: implement actual submission logic here, not just alert
 	}

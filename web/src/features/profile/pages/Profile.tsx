@@ -13,6 +13,7 @@ export function Profile() {
 	const { state: { items: artists}, load } = useArtists();
 
 	const userArtistProfile = artists.find(artist => artist.artistMail === user?.email);
+	//TODO: fix naive approach of artist email = artist
 
 	useEffect(() => {
 		load();
@@ -129,10 +130,9 @@ export function Profile() {
 					</div>
 
 					{message && <p role="status">{message}</p>}
-				</div>
-			</div>
-
-			{userArtistProfile && (
+				</div>			
+				
+				{userArtistProfile && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}
@@ -144,6 +144,9 @@ export function Profile() {
 					</button>
 				</div>
 			)}
+			</div>
+
+
 
 			{/* ✅ PURCHASE HISTORY SECTION */}
 			<div className={styles.purchaseSection}>
