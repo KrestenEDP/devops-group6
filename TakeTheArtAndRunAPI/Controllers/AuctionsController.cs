@@ -45,7 +45,7 @@ public class AuctionsController(AppDbContext context) : ControllerBase
 
     // POST /api/auctions
     [HttpPost]
-    [Authorize(Roles = "Artist")]
+    [Authorize(Policy = Policies.Artist)]
     public async Task<ActionResult<AuctionReadDto>> CreateAuctionAsync([FromBody] AuctionWriteDto dto)
     {
         var artistId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
@@ -69,7 +69,7 @@ public class AuctionsController(AppDbContext context) : ControllerBase
 
     // PUT /api/auctions/{id} - only the artist who created it
     [HttpPut("{id}")]
-    [Authorize(Roles = "Artist")]
+    [Authorize(Policy = Policies.Artist)]
     public async Task<IActionResult> UpdateAuctionAsync(Guid id, [FromBody] AuctionWriteDto dto)
     {
         var auction = await _context.Auctions.FindAsync(id);

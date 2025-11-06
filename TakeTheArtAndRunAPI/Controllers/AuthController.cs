@@ -36,8 +36,7 @@ public class AuthController(
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
-            new Claim("role", user.Role.ToString()),
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
 
@@ -77,7 +76,6 @@ public class AuthController(
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
             new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
