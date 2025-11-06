@@ -6,6 +6,7 @@ export function NewArt() {
 	const [medium, setMedium] = useState("");
 	const [condition, setCondition] = useState("");
 	const [price, setPrice] = useState<number | "">("");
+	const [dimensions, setDimensions] = useState("");
 
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const previewRef = useRef<string | null>(null);
@@ -20,7 +21,7 @@ export function NewArt() {
 		e.preventDefault();
 
 		console.log({ title, medium, condition, price });
-		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, condition, price }, null, 2));
+		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, dimensions ,condition, price }, null, 2));
 		//TODO: implement actual submission logic here, not just alert
 	}
 
@@ -101,6 +102,20 @@ export function NewArt() {
                             }
                         }
 						placeholder="e.g. Oil on canvas"
+					/>
+
+					<label className={styles.label}>Dimensions:</label>
+					<input
+						className={styles.input}
+                        type="text"
+						value={dimensions}
+						onChange={(e) => {
+                            const t = e.target.value;
+                            if (t.length <= 20) {
+                                setDimensions(e.target.value)}
+                            }
+                        }
+						placeholder="50cm x 70cm"
 					/>
 
 					<label className={styles.label}>Condition:</label>
