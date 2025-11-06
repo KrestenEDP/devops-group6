@@ -66,8 +66,7 @@ public class AuthControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         var value = okResult.Value as dynamic;
-        Assert.NotNull(value); // ensures compiler knows value isn't null
-        Assert.NotNull(value.token);
+        Assert.NotNull(value!.token);
         Assert.Equal(email, value.user.Email);
     }
 
@@ -85,7 +84,7 @@ public class AuthControllerTests
 
         // Assert
         var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-        var errors = Assert.IsAssignableFrom<IEnumerable<IdentityError>>(badRequest.Value);
+        var errors = Assert.IsType<IEnumerable<IdentityError>>(badRequest.Value, exactMatch: false);
         Assert.Contains(errors, e => e.Description == "Weak password");
     }
 
@@ -110,7 +109,7 @@ public class AuthControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         var value = okResult.Value as dynamic;
-        Assert.NotNull(value.token);
+        Assert.NotNull(value!.token);
         Assert.Equal(user.Email, value.user.Email);
     }
 
@@ -132,7 +131,7 @@ public class AuthControllerTests
 
         // Assert
         var unauthorized = Assert.IsType<UnauthorizedObjectResult>(result);
-        Assert.Equal("Invalid credentials.", ((dynamic)unauthorized.Value).message);
+        Assert.Equal("Invalid credentials.", ((dynamic)unauthorized.Value!).message);
     }
 
     [Fact]
@@ -146,6 +145,6 @@ public class AuthControllerTests
 
         // Assert
         var unauthorized = Assert.IsType<UnauthorizedObjectResult>(result);
-        Assert.Equal("Invalid credentials.", ((dynamic)unauthorized.Value).message);
+        Assert.Equal("Invalid credentials.", ((dynamic)unauthorized.Value!).message);
     }
 }
