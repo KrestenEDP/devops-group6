@@ -1,4 +1,7 @@
 /* Simple profile styles */
+
+@use '@/features/paintings/styles/shared' as shared;
+
 .profilePage {
   flex: 1;
   display: flex;
@@ -108,4 +111,67 @@
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.purchaseSection {
+  margin-top: 2rem;
+
+  h3 {
+    font-family: shared.$font-family-heading;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: shared.$color-text;
+  }
+
+  .purchaseList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .purchaseItem {
+    @include shared.card;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 40px rgba(10, 61, 98, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .purchaseImage {
+      aspect-ratio: 3/4;
+      width: 100%;
+      object-fit: cover;
+      background: #f0f0f0;
+    }
+
+    .purchaseDetails {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 {
+        font-family: shared.$font-family-heading;
+        font-size: 1.25rem;
+        margin: 0;
+        color: shared.$color-text;
+      }
+
+      p {
+        color: shared.$color-subtext;
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .purchaseList {
+    grid-template-columns: 1fr;
+  }
 }

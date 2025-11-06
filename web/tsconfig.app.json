@@ -31,7 +31,8 @@
       "@components/*": ["src/components/*"],
       "@features/*": ["src/features/*"],
       "@routes/*": ["src/routes/*"],
-      "@context/*": ["src/context/*"]
+      "@context/*": ["src/context/*"],
+      "@data/*": ["src/data/*"]
     },
     "allowSyntheticDefaultImports": true
   },
