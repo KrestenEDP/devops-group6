@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@context/UserContext.tsx";
 import styles from "../styles/Profile.module.scss";
+import { useArtists } from "@context/ArtistsContext.tsx";
 import { ROUTES } from "@routes/routes";
 import { mockPurchases } from "@data/mockPurchases";
 import { mockAuctions, formatCurrency } from "@data/mockAuctions";
@@ -9,11 +10,18 @@ import { mockAuctions, formatCurrency } from "@data/mockAuctions";
 export function Profile() {
 	const navigate = useNavigate();
 	const { user, isLoggedIn, login, logout } = useUser();
+	const { state: { items: artists}, load } = useArtists();
+
+	const userArtistProfile = artists.find(artist => artist.artistMail === user?.email);
+
+	useEffect(() => {
+		load();
+	}, [load]);
 
 	const [name, setName] = useState(user?.name ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
-	const [isArtist, setIsArtist] = useState(user?.isArtist ?? false);
+
 
 
 	if (!isLoggedIn) {
@@ -40,12 +48,10 @@ export function Profile() {
 
 		// Update the user in context (and localStorage via context)
 		login({
-			id: user!.id, name, email,
-			isArtist: user!.isArtist,
+			id: user!.id, name, email
+
 		});
 		setMessage("Profile updated.");
-
-		setIsArtist(name === "test test");
 		setTimeout(() => setMessage(null), 2000);
 	}
 
@@ -126,7 +132,7 @@ export function Profile() {
 				</div>
 			</div>
 
-			{isArtist && (
+			{userArtistProfile && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}

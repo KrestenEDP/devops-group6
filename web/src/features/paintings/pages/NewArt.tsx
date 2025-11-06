@@ -21,6 +21,7 @@ export function NewArt() {
 
 		console.log({ title, medium, condition, price });
 		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, condition, price }, null, 2));
+		//TODO: implement actual submission logic here, not just alert
 	}
 
 	// cleanup object URL on unmount
