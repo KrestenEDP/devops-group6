@@ -34,27 +34,8 @@ public class AuthController(
 
         await userManager.AddToRoleAsync(user, UserRole.User.ToString());
 
-        var claims = new[]
-        {
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id)
-        };
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken(
-            expires: DateTime.Now.AddHours(2),
-            signingCredentials: creds,
-            claims: claims
-        );
-
-        var userDto = new
-        {
-            user.Id,
-            user.Email,
-            Role = user.Role.ToString(),
-            Transactions = new List<object>()
-        };
+        var token = GenerateJwtToken(user);
+        var userDto = GenerateUserDto(user);
 
         return Ok(new
         {
@@ -74,6 +55,18 @@ public class AuthController(
         if (user == null || !await userManager.CheckPasswordAsync(user, dto.Password))
             return Unauthorized(new { message = "Invalid credentials." });
 
+        var token = GenerateJwtToken(user);
+        var userDto = GenerateUserDto(user);
+
+        return Ok(new
+        {
+            token = new JwtSecurityTokenHandler().WriteToken(token),
+            user = userDto
+        });
+    }
+
+    private JwtSecurityToken GenerateJwtToken(User user)
+    {
         var claims = new[]
         {
             new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
@@ -88,6 +81,11 @@ public class AuthController(
             claims: claims
         );
 
+        return token;
+    }
+
+    private object GenerateUserDto(User user)
+    {
         var userDto = new
         {
             user.Id,
@@ -112,11 +110,7 @@ public class AuthController(
             })
         };
 
-        return Ok(new
-        {
-            token = new JwtSecurityTokenHandler().WriteToken(token),
-            user = userDto
-        });
+        return userDto;
     }
 }
 
