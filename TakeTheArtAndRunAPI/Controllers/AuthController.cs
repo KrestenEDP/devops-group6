@@ -25,21 +25,21 @@ public class AuthController(
         {
             UserName = dto.Email,
             Email = dto.Email,
-            Role = dto.Role
+            Role = UserRole.User,
         };
 
         var result = await userManager.CreateAsync(user, dto.Password);
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
-        await userManager.AddToRoleAsync(user, dto.Role.ToString());
+        await userManager.AddToRoleAsync(user, UserRole.User.ToString());
 
         var claims = new[]
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
-        new Claim("role", user.Role.ToString()),
-        new Claim(ClaimTypes.NameIdentifier, user.Id)
-    };
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+            new Claim("role", user.Role.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
+        };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -78,7 +78,7 @@ public class AuthController(
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
-            new Claim("role", user.Role.ToString()),
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
 
@@ -122,5 +122,5 @@ public class AuthController(
     }
 }
 
-public record RegisterDto(string Email, string Password, UserRole Role=UserRole.User);
+public record RegisterDto(string Email, string Password);
 public record LoginDto(string Email, string Password);
