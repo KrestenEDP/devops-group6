@@ -27,8 +27,8 @@ public class AuctionsControllerTests
         var testUser = new User
         {
             Id = _artistId.ToString(),
-            UserName = "artist@example.com",
-            Email = "artist@example.com",
+            UserName = "artistId@example.com",
+            Email = "artistId@example.com",
             Role = UserRole.Artist
         };
         _context.Users.Add(testUser);
@@ -36,6 +36,7 @@ public class AuctionsControllerTests
         var unsoldAuction = new Auction(
             title: "Auction 1",
             artistId: _artistId,
+            artistName: "Test Artist 1",
             imageUrl: "img1.jpg",
             limit: 100m,
             medium: "Oil",
@@ -45,6 +46,7 @@ public class AuctionsControllerTests
         var soldAuction = new Auction(
             title: "Auction 2",
             artistId: _artistId,
+            artistName: "Test Artist 2",
             imageUrl: "img2.jpg",
             limit: 200m,
             medium: "Acrylic",
@@ -112,14 +114,25 @@ public class AuctionsControllerTests
             Dimensions = "40x40",
             ArtistBio = "Bio"
         };
-
+        var testArtist = new Artist
+        {
+            Name = "Test Artist",
+            Bio = "Bio",
+            ImageUrl = "img1.jpg",
+            UserId = _artistId.ToString()
+        };
+        _context.Artists.Add(testArtist);
+        _context.SaveChanges();
         var result = await _controller.CreateAuctionAsync(dto);
 
         var createdResult = Assert.IsType<CreatedAtActionResult>(result.Result);
         var auction = Assert.IsType<AuctionReadDto>(createdResult.Value);
 
+        var createdAuction = await _context.Auctions.FindAsync(auction.Id);
+
         Assert.Equal("New Auction", auction.Title);
-        Assert.Equal(_artistId, auction.ArtistId);
+        Assert.NotNull(createdAuction);
+        Assert.Equal("New Auction", createdAuction.Title);
     }
 
     [Fact]
@@ -152,7 +165,7 @@ public class AuctionsControllerTests
 
         var result = await _controller.PlaceBidAsync(auction.Id, 200m);
 
-        Assert.IsType<OkResult>(result);
+        Assert.IsType<OkObjectResult>(result);
 
         var updatedAuction = await _context.Auctions.FindAsync(auction.Id);
         Assert.NotNull(updatedAuction);
@@ -175,7 +188,7 @@ public class AuctionsControllerTests
     [Fact]
     public async Task UpdateAuction_NotOwnerUser_ReturnsForbid()
     {
-        // Arrange: create another artist ID
+        // Arrange: create another artistId ID
         var otherArtistId = Guid.NewGuid();
         var auction = _context.Auctions.First(a => !a.IsSold);
 

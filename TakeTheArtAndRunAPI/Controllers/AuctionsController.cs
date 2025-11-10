@@ -49,11 +49,12 @@ public class AuctionsController(AppDbContext context) : ControllerBase
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
         var artist = await _context.Artists.FirstOrDefaultAsync(a => a.UserId == userId);
-        if (artist == null) return Forbid("You must be an artist to create an auction.");
+        if (artist == null) return Forbid("You must be an artistId to create an auction.");
         var newAuction = new Auction
         (
             title: dto.Title,
             artistId: artist.Id,
+            artistName: artist.Name,
             imageUrl: dto.ImageUrl,
             limit: dto.Limit,
             medium: dto.Medium,
@@ -68,7 +69,7 @@ public class AuctionsController(AppDbContext context) : ControllerBase
         return CreatedAtAction("GetAuctionById", new { id = newAuction.Id }, readDto);
     }
 
-    // PUT /api/auctions/{id} - only the artist who created it
+    // PUT /api/auctions/{id} - only the artistId who created it
     [HttpPut("{id}")]
     [Authorize(Policy = Policies.Artist)]
     public async Task<IActionResult> UpdateAuctionAsync(Guid id, [FromBody] AuctionWriteDto dto)

@@ -10,7 +10,7 @@ public static class AuctionMapper
         return new AuctionReadDto
         {
             Id = auction.Id,
-            ArtistId = auction.ArtistId,
+            ArtistName = auction.ArtistName,
             Title = auction.Title,
             ImageUrl = auction.ImageUrl,
             HighestBid = auction.HighestBid,

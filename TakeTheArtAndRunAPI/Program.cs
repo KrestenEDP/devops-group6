@@ -32,46 +32,6 @@ builder.Services.AddAuthentication(options =>
 .AddJwtBearer(options =>
 {
     options.UseSecurityTokenValidators = true;
-    options.Events = new JwtBearerEvents()
-    {
-        OnAuthenticationFailed = context =>
-        {
-            Console.WriteLine("Authentication failed: " + context.Exception.Message);
-            return Task.CompletedTask;
-        },
-        OnMessageReceived = msg =>
-        {
-            var token = msg?.Request.Headers.Authorization.ToString();
-            string path = msg?.Request.Path ?? "";
-            if (!string.IsNullOrEmpty(token))
-            {
-                Console.WriteLine("Access token");
-                Console.WriteLine($"URL: {path}");
-                Console.WriteLine($"Token: {token}\r\n");
-            }
-            else
-            {
-                Console.WriteLine("Access token");
-                Console.WriteLine("URL: " + path);
-                Console.WriteLine("Token: No access token provided\r\n");
-            }
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = ctx =>
-        {
-            Console.WriteLine();
-            Console.WriteLine("Claims from the access token");
-            if (ctx?.Principal != null)
-            {
-                foreach (var claim in ctx.Principal.Claims)
-                {
-                    Console.WriteLine($"{claim.Type} - {claim.Value}");
-                }
-            }
-            Console.WriteLine();
-            return Task.CompletedTask;
-        }
-    };
     options.RequireHttpsMetadata = false; // <--- allow HTTP for local testing
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -122,6 +82,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var context = services.GetRequiredService<AppDbContext>();
 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
 // Seed roles
@@ -140,6 +102,62 @@ if (await userManager.FindByEmailAsync(adminEmail) == null)
     await userManager.CreateAsync(admin, "AdminPassword123!");
     await userManager.AddToRoleAsync(admin, "Admin");
 }
+
+// Seed Artists
+var artistsData = new List<(string Name, string Email, string ImageUrl, string Bio)>
+{
+    ("Maelle Dessendre", "maelleDes@abracadabra.com", "https://images.steamusercontent.com/ugc/10549703576396892245/C9D46CDB01391AD4652F41B34904B3C75D084477/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
+    "Maelle is a fiercely talented artist and a masterful duelist, blending elegance and edge in everything she does..."),
+
+    ("Alex Shadow", "AlexDarktherThanEdge@abracadabra.com", "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+    "Alex is a bold and talented painter whose edgy, distinctive style turns heads and challenges norms...")
+};
+foreach (var artistInfo in artistsData)
+{
+    // Skip if already exists
+    if (await context.Artists.AnyAsync(a => a.Email == artistInfo.Email)) continue;
+
+    // Create User
+    var user = new User
+    {
+        UserName = artistInfo.Email,
+        Email = artistInfo.Email,
+        Role = UserRole.Artist
+    };
+    await userManager.CreateAsync(user, "Password123!");
+    await userManager.AddToRoleAsync(user, "Artist");
+
+    // Create Artist
+    var artist = new Artist
+    {
+        Name = artistInfo.Name,
+        Email = artistInfo.Email,
+        Bio = artistInfo.Bio,
+        ImageUrl = artistInfo.ImageUrl,
+        UserId = user.Id
+    };
+    context.Artists.Add(artist);
+}
+
+await context.SaveChangesAsync();
+
+// Seed Auctions/Paintings
+var maelle = await context.Artists.FirstOrDefaultAsync(a => a.Email == "maelleDes@abracadabra.com");
+var alex = await context.Artists.FirstOrDefaultAsync(a => a.Email == "AlexDarktherThanEdge@abracadabra.com");
+
+var auctionsData = new List<Auction>
+    {
+        new("Fencing Duel", maelle!.Id, maelle.Name, "https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80", 500, "Oil on Canvas", "24x36", maelle.Bio),
+        new("Edge of Darkness", alex!.Id, alex.Name, "https://images.unsplash.com/photo-1583119912267-cc97c911e416?w=800&q=80", 750, "Acrylic", "30x40", alex.Bio)
+    };
+
+foreach (var auction in auctionsData)
+{
+    if (!context.Auctions.Any(a => a.Title == auction.Title)) // prevent duplicates
+        context.Auctions.Add(auction);
+}
+
+await context.SaveChangesAsync();
 
 app.Run();
 

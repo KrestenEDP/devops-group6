@@ -3,8 +3,8 @@
 public class AuctionReadDto
 {
     public Guid Id { get; set; }
-    public Guid ArtistId { get; set; }
     public string Title { get; set; } = string.Empty;
+    public string ArtistName { get; set; } = string.Empty;
     public string ImageUrl { get; set; } = string.Empty;
     public decimal HighestBid { get; set; }
     public int BidCount { get; set; }

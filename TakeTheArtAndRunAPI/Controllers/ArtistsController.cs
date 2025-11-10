@@ -1,11 +1,13 @@
 ﻿namespace TakeTheArtAndRunAPI.Controllers;
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using TakeTheArtAndRunAPI.Data;
+using TakeTheArtAndRunAPI.DTOs;
+using TakeTheArtAndRunAPI.Mappers;
 using TakeTheArtAndRunAPI.Models;
 
 [ApiController]
@@ -17,7 +19,9 @@ public class ArtistsController(AppDbContext context, UserManager<User> userManag
     public async Task<ActionResult<IEnumerable<Artist>>> GetArtistsAsync()
     {
         var artists = await context.Artists.ToListAsync();
-        return Ok(artists);
+
+        var dtos = artists.Select(a => a.ToDto()).ToList();
+        return Ok(dtos);
     }
 
     // POST /api/artists
@@ -35,6 +39,8 @@ public class ArtistsController(AppDbContext context, UserManager<User> userManag
         {
             Name = dto.Name,
             Bio = dto.Bio,
+            ImageUrl = dto.ImageUrl,
+            Email = dto.Email,
             UserId = dto.UserId
         };
 
@@ -49,18 +55,17 @@ public class ArtistsController(AppDbContext context, UserManager<User> userManag
     [Authorize(Policy = Policies.Admin)]
     public async Task<IActionResult> UpdateArtistAsync(Guid id, [FromBody] ArtistUpdateDto updatedArtist)
     {
-        var artist = await context.Artists.FindAsync(id);
-        if (artist == null)
+        var artistId = await context.Artists.FindAsync(id);
+        if (artistId == null)
         {
             return NotFound();
         }
-        artist.Name = updatedArtist.Name;
-        artist.Bio = updatedArtist.Bio;
-        context.Artists.Update(artist);
+        artistId.Name = updatedArtist.Name;
+        artistId.Bio = updatedArtist.Bio;
+        artistId.ImageUrl = updatedArtist.ImageUrl;
+        artistId.Email = updatedArtist.Email;
+        context.Artists.Update(artistId);
         await context.SaveChangesAsync();
         return Ok();
     }
 }
-
-public record ArtistCreateDto(string UserId, string Name, string Bio);
-public record ArtistUpdateDto(string Name, string Bio);

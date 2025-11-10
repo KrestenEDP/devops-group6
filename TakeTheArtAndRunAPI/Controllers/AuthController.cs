@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TakeTheArtAndRunAPI.Data;
+using TakeTheArtAndRunAPI.Mappers;
 using TakeTheArtAndRunAPI.Models;
 
 namespace TakeTheArtAndRunAPI.Controllers;
@@ -84,30 +85,14 @@ public class AuthController(
         return token;
     }
 
-    private object GenerateUserDto(User user)
+    private static object GenerateUserDto(User user)
     {
         var userDto = new
         {
             user.Id,
             user.Email,
             Role = user.Role.ToString(),
-            Transactions = user.Transactions.Select(t => new
-            {
-                t.Id,
-                t.AmountPaid,
-                t.PurchasedAt,
-                Auction = t.Auction is not null
-                    ? new
-                    {
-                        t.Auction.Id,
-                        t.Auction.Title,
-                        t.Auction.ImageUrl,
-                        t.Auction.HighestBid,
-                        t.Auction.Medium,
-                        t.Auction.Dimensions
-                    }
-                    : null
-            })
+            Transactions = user.Transactions.Select(a => a.ToDto()).ToList()
         };
 
         return userDto;
