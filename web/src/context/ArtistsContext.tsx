@@ -1,5 +1,6 @@
 import { createDataContext } from "./createDataContext";
 import type { Artist } from "@customTypes/artist.ts";
+import {handleApiResponse} from "@context/handleApiResponse.ts";
 //import { mockArtists } from "@features/artists/mockData/mockArtists";
 
 const API_BASE = import.meta.env.VITE_API_URL;
@@ -22,7 +23,7 @@ const fetchArtists = async (): Promise<Artist[]> => {
         },
     });
 
-    if (!res.ok) throw new Error("Failed to fetch auctions");
+    await handleApiResponse(res, "Failed to fetch artists");
     return await res.json();
 };
 

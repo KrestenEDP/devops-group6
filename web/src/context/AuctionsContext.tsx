@@ -1,6 +1,7 @@
 import {createDataContext, type DataAction, type DataState} from "./createDataContext";
 import type { Auction } from "@customTypes/auction.ts";
 import React from "react";
+import {handleApiResponse} from "@context/handleApiResponse.ts";
 //import { mockAuctions } from "@features/paintings/mockData/mockAuctions";
 
 const API_BASE = import.meta.env.VITE_API_URL;
@@ -19,7 +20,7 @@ const fetchAuctions = async (): Promise<Auction[]> => {
         },
     });
 
-    if (!res.ok) throw new Error("Failed to fetch auctions");
+    await handleApiResponse(res, "Failed to fetch auctions");
     return await res.json();
 };
 
@@ -54,10 +55,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             body: JSON.stringify(amount),
         });
 
-        if (!res.ok) {
-            const msg = await res.text();
-            throw new Error(msg || "Failed to place bid");
-        }
+        await handleApiResponse(res, "Failed to place bid");
 
         const updatedItems = context.state.items.map(a =>
             a.id === auctionId ? { ...a, highestBid: amount, bidCount: a.bidCount+1 } : a
@@ -75,10 +73,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             body: JSON.stringify(data),
         });
 
-        if (!res.ok) {
-            const msg = await res.text();
-            throw new Error(msg || "Failed to update auction");
-        }
+        await handleApiResponse(res, "Failed to update auction");
 
         const updatedItems = context.state.items.map(a => (a.id === auctionId ? { ...a, ...data } : a));
         context.dispatch({ type: "SET_ITEMS", payload: updatedItems });

@@ -47,8 +47,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         });
 
         if (!res.ok) {
-            const msg = await res.text();
-            throw new Error(`Login failed: ${msg}`); // TODO: better error handling
+            let errorMessage = "Login failed.";
+            try {
+                const data = await res.json();
+                if (data?.message) errorMessage = data.message;
+            } catch { /* empty */ }
+            throw new Error(errorMessage);
         }
 
         const data = await res.json();
@@ -63,8 +67,17 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         });
 
         if (!res.ok) {
-            const msg = await res.text();
-            throw new Error(`Registration failed: ${msg}`); // TODO: better error handling
+            let errorMessage = "Registration failed.";
+            try {
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    // Combine all descriptions into one message
+                    errorMessage = data.map((e: any) => e.description).join(" ");
+                } else if (data?.message) {
+                    errorMessage = data.message;
+                }
+            } catch { /* empty */ }
+            throw new Error(errorMessage);
         }
 
         const data = await res.json();

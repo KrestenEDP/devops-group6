@@ -29,7 +29,7 @@ export function Login() {
             setMessage("Successfully logged in. Redirecting to gallery...");
             setTimeout(() => navigate(ROUTES.GALLERY), 800);
         } catch (err: any) {
-            setMessage(err.message || "Login failed.");
+            setMessage(err.message || "Failed to create account.");
         } finally {
             setLoading(false);
         }
@@ -82,7 +82,10 @@ export function Login() {
                             </button>
                     </form>
 
-                    {message && <p role="status">{message}</p>}
+                    {message &&
+                        <p role="status" className={message.includes("successfully") ? styles.success : styles.error}>
+                            {message}
+                        </p>}
 
                     <div className={styles.loginButtonsContainer}>
                         <button

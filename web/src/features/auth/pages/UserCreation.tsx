@@ -105,7 +105,10 @@ export function UserCreation() {
                             {loading ? "Creating Account..." : "Create Account"}
                         </button>
                     </form>
-                    {message && <p role="status">{message}</p>}
+                    {message &&
+                        <p role="status" className={message.includes("successfully") ? styles.success : styles.error}>
+                            {message}
+                        </p>}
                 </div>
             </div>
         </div>
