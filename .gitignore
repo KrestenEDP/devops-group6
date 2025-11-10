@@ -1,7 +1,5 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+TakeTheArtAndRunAPI/bin/*
+TakeTheArtAndRunAPI/obj/*
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -37,3 +35,7 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea
+/.vs/TakeTheArtAndRunAPI/CopilotIndices
+/.vs/TakeTheArtAndRunAPI.slnx/FileContentIndex
+/.vs
+/TakeTheArtAndRunAPI/out
