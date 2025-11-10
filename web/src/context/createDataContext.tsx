@@ -41,7 +41,7 @@ export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string)
         }
 
         const load = () => {
-            if (state.items.length === 0) {
+            if (state.items.length === 0 && !state.loading && !state.error) {
                 fetchData();
             }
         };

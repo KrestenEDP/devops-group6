@@ -39,3 +39,4 @@ build/
 /.vs/TakeTheArtAndRunAPI.slnx/FileContentIndex
 /.vs
 /TakeTheArtAndRunAPI/out
+/TakeTheArtAndRunAPI/Migrations

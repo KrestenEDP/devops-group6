@@ -29,7 +29,7 @@ describe('App Routing', () => {
         );
 
         expect(screen.getByTestId('painting-title')).toHaveTextContent(painting.title);
-        expect(screen.getByTestId('painting-artist')).toHaveTextContent(painting.artist);
+        expect(screen.getByTestId('painting-artist')).toHaveTextContent(painting.artistId);
         expect(screen.getByTestId('bid-input')).toHaveAttribute(
             'placeholder',
             `Place your bid`
@@ -65,7 +65,7 @@ describe('App Navigation', () => {
         await user.click(paintingCard);
 
         expect(await screen.findByTestId('painting-title')).toHaveTextContent(painting.title);
-        expect(screen.getByTestId('painting-artist')).toHaveTextContent(painting.artist);
+        expect(screen.getByTestId('painting-artist')).toHaveTextContent(painting.artistId);
         expect(screen.getByTestId('current-bid')).toBeInTheDocument();
     });
 

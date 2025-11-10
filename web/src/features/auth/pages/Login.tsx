@@ -7,39 +7,31 @@ import styles from "../styles/Login.module.scss";
 
 export function Login() {
     const navigate = useNavigate();
+    const { login } = useUser();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
 
-    const { login } = useUser();
+    async function handleSubmit(e?: FormEvent) {
+        e?.preventDefault();
 
-    function handleSubmit(e?: FormEvent) {
-        // if called from an event (submit or keydown), prevent default
-        try {
-            e && (e as FormEvent).preventDefault();
-        } catch {
-            // ignore if preventDefault isn't available
-        }
-        // Placeholder behavior: validate basic input and show a message.
         if (!email || !password) {
             setMessage("Please enter both email and password.");
             return;
-        } else {
-            setMessage("Your email or password is incorrect, try again fool");
         }
+        setLoading(true);
+        setMessage(null);
 
-        // Simulate success without calling any backend if test and test.
-        if (email === "test" && password === "test") {
-            const user = { id: "1", name: "Test User", email};
-            // update global user state (and persist to localStorage)
-            login(user);
-            setMessage("Succesfully logged in. Redirecting to gallery...");
-
-            // Small timeout to let user see the message, then navigate to gallery route.
-            setTimeout(() => {
-                navigate(ROUTES.GALLERY);
-            }, 800);
-            return;
+        try {
+            await login(email, password); // use the context login
+            setMessage("Successfully logged in. Redirecting to gallery...");
+            setTimeout(() => navigate(ROUTES.GALLERY), 800);
+        } catch (err: any) {
+            setMessage(err.message || "Login failed.");
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -57,13 +49,11 @@ export function Login() {
                                 name="email"
                                 placeholder="Enter your email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                        e.preventDefault();
-                                        handleSubmit();
-                                    }
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    setMessage(null);
                                 }}
+                                autoComplete="email"
                             />
                         </div>
 
@@ -75,22 +65,20 @@ export function Login() {
                                 name="password"
                                 placeholder="Enter your password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                        e.preventDefault();
-                                        handleSubmit();
-                                    }
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    setMessage(null);
                                 }}
+                                autoComplete="current-password"
                             />
                         </div>
 
                             <button
-                                type="button"
+                                type="submit"
                                 className={styles.loginButton}
-                                onClick={() => handleSubmit()}
+                                disabled={loading}
                             >
-                                Login
+                                {loading ? "Logging in..." : "Login"}
                             </button>
                     </form>
 

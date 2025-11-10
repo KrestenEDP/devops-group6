@@ -4,8 +4,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "1",
         title: "Sunset Over the Valley",
-        artist: "Claude Monet",
-        year: 1889,
+        artistId: "Claude Monet",
         imageUrl: "https://images.unsplash.com/photo-1549289524-06cf8837ace5?w=800&q=80",
         highestBid: 125000,
         bidCount: 23,
@@ -16,8 +15,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "2",
         title: "Portrait of a Lady",
-        artist: "Johannes Vermeer",
-        year: 1665,
+        artistId: "Johannes Vermeer",
         imageUrl: "https://images.unsplash.com/photo-1583119912267-cc97c911e416?w=800&q=80",
         highestBid: 450000,
         bidCount: 45,
@@ -28,8 +26,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "3",
         title: "The Storm",
-        artist: "J.M.W. Turner",
-        year: 1842,
+        artistId: "J.M.W. Turner",
         imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80",
         highestBid: 280000,
         bidCount: 31,
@@ -40,8 +37,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "4",
         title: "Abstract Composition",
-        artist: "Wassily Kandinsky",
-        year: 1923,
+        artistId: "Wassily Kandinsky",
         imageUrl: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80",
         highestBid: 320000,
         bidCount: 28,
@@ -52,8 +48,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "5",
         title: "Garden at Giverny",
-        artist: "Claude Monet",
-        year: 1900,
+        artistId: "Claude Monet",
         imageUrl: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=800&q=80",
         highestBid: 180000,
         bidCount: 19,
@@ -64,8 +59,7 @@ export const mockAuctions: Auction[] = [
     {
         id: "6",
         title: "Still Life with Flowers",
-        artist: "Paul Cézanne",
-        year: 1895,
+        artistId: "Paul Cézanne",
         imageUrl: "https://images.unsplash.com/photo-1606562758304-0eaaa45acdac?w=800&q=80",
         highestBid: 220000,
         bidCount: 26,

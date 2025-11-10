@@ -12,7 +12,7 @@ export function Profile() {
 	const { user, isLoggedIn, login, logout } = useUser();
 	const { state: { items: artists}, load } = useArtists();
 
-	const userArtistProfile = artists.find(artist => artist.artistMail === user?.email);
+	const userArtistProfile = artists.find(artist => artist.email === user?.email);
 	//TODO: fix naive approach of artist email = artist
 
 	useEffect(() => {
@@ -166,7 +166,7 @@ export function Profile() {
 									/>
 									<div className={styles.purchaseDetails}>
 										<h4>{art.title}</h4>
-										<p>by {art.artist}</p>
+										<p>by {art.artistId}</p>
 										<p>
 											Purchased on{" "}
 											{new Date(purchase.purchasedAt).toLocaleString("da-DK", {

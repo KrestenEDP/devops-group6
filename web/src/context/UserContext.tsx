@@ -1,19 +1,24 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type {Transaction} from "@customTypes/transaction.ts";
 
 // Only local login so far
-
 export interface User {
     id: string;
     name: string;
     email: string;
+    token?: string;
+    transactions?: Transaction[];
 }
 
 interface UserContextProps {
     user: User | null;
-    login: (user: User) => void;
-    logout: () => void;
     isLoggedIn: boolean;
+    login: (email: string, password: string) => Promise<void>;
+    register: (email: string, password: string) => Promise<void>;
+    logout: () => void;
 }
+
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
@@ -27,24 +32,57 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }
     });
 
-    const login = (newUser: User) => {
-        setUser(newUser);
-        try {
-            localStorage.setItem("user", JSON.stringify(newUser));
-        } catch { /* empty */ }
+    const saveUser = (token: string, userData: User) => {
+        const fullUser = { ...userData, token };
+        setUser(fullUser);
+        localStorage.setItem("user", JSON.stringify(fullUser));
+        localStorage.setItem("token", token);
     };
+
+    const login = async (email: string, password: string) => {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        if (!res.ok) {
+            const msg = await res.text();
+            throw new Error(`Login failed: ${msg}`); // TODO: better error handling
+        }
+
+        const data = await res.json();
+        saveUser(data.token, data.user);
+    };
+
+    const register = async (email: string, password: string) => {
+        const res = await fetch(`${API_BASE}/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        if (!res.ok) {
+            const msg = await res.text();
+            throw new Error(`Registration failed: ${msg}`); // TODO: better error handling
+        }
+
+        const data = await res.json();
+        saveUser(data.token, data.user);
+    }
 
     const logout = () => {
         setUser(null);
         try {
             localStorage.removeItem("user");
+            localStorage.removeItem("token");
         } catch { /* empty */ }
     };
 
     const isLoggedIn = !!user;
 
     return (
-        <UserContext.Provider value={{ user, login, logout, isLoggedIn}}>
+        <UserContext.Provider value={{ user, login, register, logout, isLoggedIn}}>
             {children}
         </UserContext.Provider>
     );

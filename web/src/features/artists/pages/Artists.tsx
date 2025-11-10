@@ -20,13 +20,13 @@ export function Artists() {
 
     return (
         <div className={styles.artistsList}>
-            {artists.map(({ id, name, image }: Artist) => (
+            {artists.map(({ id, name, imageUrl }: Artist) => (
                 <div
                     key={id}
                     className={styles.artistItem}
                     onClick={() => navigate(ROUTES.ARTIST_DETAIL(id))}
                 >
-                    <img src={image} alt={name} className={styles.artistItemImage} />
+                    <img src={imageUrl} alt={name} className={styles.artistItemImage} />
                     <span className={styles.artistItemName}>{name}</span>
                 </div>
             ))}

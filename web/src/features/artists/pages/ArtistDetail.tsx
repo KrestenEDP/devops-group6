@@ -36,7 +36,7 @@ export function ArtistDetail() {
                 ← Back
             </button>
             <div className={styles.artistDetailCard}>
-                <img src={artist.image} alt={artist.name} className={styles.artistDetailImage} />
+                <img src={artist.imageUrl} alt={artist.name} className={styles.artistDetailImage} />
                 <h1 className={styles.artistDetailName}>{artist.name}</h1>
                 <p className={styles.artistDetailBio}>{artist.bio}</p>
             </div>

@@ -1,8 +1,7 @@
 export type Auction = {
     id: string;
     title: string;
-    artist: string;
-    year: number;
+    artistId: string;
     imageUrl: string;
     highestBid: number;
     bidCount: number;

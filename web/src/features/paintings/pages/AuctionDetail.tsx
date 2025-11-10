@@ -1,18 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useAuctions } from "@context/AuctionsContext";
+import { useAuctionsActions} from "@context/AuctionsContext";
 import styles from "../styles/AuctionDetail.module.scss";
 import {ROUTES} from "@routes/routes.ts";
 import {ArrowLeft, Info, User, Users} from "lucide-react";
 import {formatCurrency} from "@features/paintings/mockData/mockAuctions.ts";
 import {Loading} from "@components/common/Loading/Loading.tsx";
-import React from "react";
+import React, {useState} from "react";
 
 export function AuctionDetail() {
     const { auctionId } = useParams<{ auctionId: string }>();
     const navigate = useNavigate();
-    const { state: { items: auctions, loading, error }, load } = useAuctions();
+    const { state: { items: auctions, loading, error }, load, placeBid } = useAuctionsActions();
 
-    // Load data on component mount
+    const [bidAmount, setBidAmount] = useState<number | "">("");
+    const [message, setMessage] = useState<string | null>(null);
+
     React.useEffect(() => {
         load();
     }, [load]);
@@ -32,6 +34,21 @@ export function AuctionDetail() {
             </div>
         );
     }
+
+    const handlePlaceBid = async () => {
+        if (!bidAmount || bidAmount <= auction.highestBid) {
+            setMessage(`Your bid must be higher than the current highest bid: ${formatCurrency(auction.highestBid)}`);
+            return;
+        }
+
+        try {
+            await placeBid(auction.id, Number(bidAmount));
+            setMessage("Bid placed successfully!");
+            setBidAmount("");
+        } catch (err: any) {
+            setMessage(err.message || "Failed to place bid.");
+        }
+    };
 
     return (
         <div className={styles.detailPage}>
@@ -56,7 +73,7 @@ export function AuctionDetail() {
                     <div className={styles.infoSection}>
                         <div className={styles.titleSection}>
                             <h1 className={styles.paintingName}>{auction.title}</h1>
-                            <p className={styles.artistName}>{auction.artist}</p>
+                            <p className={styles.artistName}>{auction.artistId}</p>
                         </div>
 
                         {/* Bid Card with primary gradient applied */}
@@ -80,9 +97,17 @@ export function AuctionDetail() {
                                     className={styles.bidInput}
                                     type="number"
                                     placeholder="Place your bid"
+                                    value={bidAmount}
+                                    onChange={(e) => setBidAmount(Number(e.target.value))}
                                 />
-                                <button className={styles.placeBidButton}>Place Bid</button>
+                                <button
+                                    className={styles.placeBidButton}
+                                    onClick={handlePlaceBid}
+                                >
+                                    Place Bid
+                                </button>
                             </div>
+                            {message && <p role="status">{message}</p>}
                         </div>
 
                         {/* Details Card */}

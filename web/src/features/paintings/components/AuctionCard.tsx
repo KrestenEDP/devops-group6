@@ -27,7 +27,7 @@ export function AuctionCard({ auction }: AuctionCardProps) {
                 <div className={styles.auctionInfo}>
                     <h3 className={styles.auctionTitle}>{auction.title}</h3>
                     <p className={styles.auctionArtist}>
-                        {auction.artist}, {auction.year}
+                        {auction.artistId}
                     </p>
 
                     <div className={styles.auctionDetails}>
