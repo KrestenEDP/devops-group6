@@ -2,16 +2,16 @@ import {createDataContext, type DataAction, type DataState} from "./createDataCo
 import type { Auction } from "@customTypes/auction.ts";
 import React from "react";
 import {handleApiResponse} from "@context/handleApiResponse.ts";
-//import { mockAuctions } from "@features/paintings/mockData/mockAuctions";
+import { mockAuctions } from "@features/paintings/mockData/mockAuctions";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 
 // Fake API for demonstration
-/*const fetchAuctions = async () => {
+const fetchAuctions = async () => {
     return new Promise<Auction[]>((resolve) => setTimeout(() => resolve(mockAuctions), 500));
-};*/
+};
 
-const fetchAuctions = async (): Promise<Auction[]> => {
+/*const fetchAuctions = async (): Promise<Auction[]> => {
     const token = localStorage.getItem("token");
     const res = await fetch(`${API_BASE}/auctions`, {
         headers: {
@@ -22,7 +22,7 @@ const fetchAuctions = async (): Promise<Auction[]> => {
 
     await handleApiResponse(res, "Failed to fetch auctions");
     return await res.json();
-};
+};*/
 
 export const { Provider: AuctionsProvider, useDataContext: useAuctions } =
     createDataContext<Auction>(fetchAuctions, "Auctions");

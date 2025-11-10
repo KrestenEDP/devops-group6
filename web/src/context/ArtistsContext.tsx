@@ -1,7 +1,7 @@
 import { createDataContext } from "./createDataContext";
 import type { Artist } from "@customTypes/artist.ts";
-import {handleApiResponse} from "@context/handleApiResponse.ts";
-//import { mockArtists } from "@features/artists/mockData/mockArtists";
+//import {handleApiResponse} from "@context/handleApiResponse.ts";
+import { mockArtists } from "@features/artists/mockData/mockArtists";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 if (!API_BASE) {
@@ -10,11 +10,11 @@ if (!API_BASE) {
     );
 }
 // Fake API for demonstration
-/*const fetchArtists = async () => {
+const fetchArtists = async () => {
     return new Promise<Artist[]>((resolve) => setTimeout(() => resolve(mockArtists), 500));
-};*/
+};
 
-const fetchArtists = async (): Promise<Artist[]> => {
+/*const fetchArtists = async (): Promise<Artist[]> => {
     const token = localStorage.getItem("token");
     const res = await fetch(`${API_BASE}/artists`, {
         headers: {
@@ -25,6 +25,6 @@ const fetchArtists = async (): Promise<Artist[]> => {
 
     await handleApiResponse(res, "Failed to fetch artists");
     return await res.json();
-};
+};*/
 
 export const { Provider: ArtistsProvider, useDataContext: useArtists } = createDataContext<Artist>(fetchArtists, "Artists");
