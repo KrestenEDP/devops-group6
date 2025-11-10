@@ -38,3 +38,4 @@ build/
 /.vs/TakeTheArtAndRunAPI/CopilotIndices
 /.vs/TakeTheArtAndRunAPI.slnx/FileContentIndex
 /.vs
+/TakeTheArtAndRunAPI/out
