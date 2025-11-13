@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TakeTheArtAndRunAPI.Data;
 using TakeTheArtAndRunAPI.DTOs;
@@ -9,7 +10,7 @@ namespace TakeTheArtAndRunAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TransactionController(AppDbContext context) : ControllerBase
+public class TransactionsController(AppDbContext context) : ControllerBase
 {
     private readonly AppDbContext _context = context;
 
@@ -19,12 +20,17 @@ public class TransactionController(AppDbContext context) : ControllerBase
     public async Task<ActionResult<IEnumerable<TransactionReadDto>>> GetTransactionsAsync()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var user = await _context.Users.FindAsync(userId);
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
+
+        var user = await _context.Users
+            .Include(u => u.Transactions)
+            .ThenInclude(t => t.Auction)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
         if (user == null) return Unauthorized();
-        var transactions = user.Transactions;
 
-        var dtos = transactions.Select(a => a.ToDto()).ToList();
-
+        var dtos = user.Transactions.Select(t => t.ToDto()).ToList();
         return Ok(dtos);
     }
 }
