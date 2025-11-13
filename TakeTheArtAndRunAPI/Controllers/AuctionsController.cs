@@ -20,7 +20,6 @@ public class AuctionsController(AppDbContext context) : ControllerBase
     public async Task<ActionResult<IEnumerable<AuctionReadDto>>> GetAuctionsAsync()
     {
         var auctions = await _context.Auctions
-            .Where(a => !a.IsSold)
             .ToListAsync();
 
         var dtos = auctions.Select(a => a.ToDto()).ToList();

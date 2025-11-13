@@ -7,6 +7,8 @@ import React from "react";
 export function Gallery() {
     const { state: { items: auctions, loading, error }, load } = useAuctions();
 
+    const activeAuctions = auctions.filter(auction => !auction.isSold);
+
     // Load data on component mount
     React.useEffect(() => {
         load();
@@ -26,7 +28,7 @@ export function Gallery() {
                 </section>
 
                 <div className={styles.auctionsGrid}>
-                    {auctions.map((auction) => (
+                    {activeAuctions.map((auction) => (
                         <AuctionCard key={auction.id} auction={auction} />
                     ))}
                 </div>

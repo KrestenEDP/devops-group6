@@ -8,4 +8,5 @@ export type Auction = {
     medium: string;
     dimensions: string;
     artistBio: string;
+    isSold: boolean;
 };

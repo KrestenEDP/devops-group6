@@ -11,4 +11,5 @@ public class AuctionReadDto
     public string Medium { get; set; } = string.Empty;
     public string Dimensions { get; set; } = string.Empty;
     public string ArtistBio { get; set; } = string.Empty;
+    public bool IsSold { get; set; }
 }

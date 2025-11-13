@@ -17,7 +17,8 @@ public static class AuctionMapper
             BidCount = auction.BidCount,
             Medium = auction.Medium,
             Dimensions = auction.Dimensions,
-            ArtistBio = auction.ArtistBio
+            ArtistBio = auction.ArtistBio,
+            IsSold = auction.IsSold
         };
     }
 }
