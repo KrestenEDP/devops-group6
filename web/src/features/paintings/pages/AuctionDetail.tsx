@@ -42,9 +42,12 @@ export function AuctionDetail() {
         }
 
         try {
-            await placeBid(auction.id, Number(bidAmount));
-            setMessage("Bid placed successfully!");
-            setBidAmount("");
+            const sold = await placeBid(auction.id, Number(bidAmount));
+            const message = sold ? "Bid accepted! Congratulations, you bought the painting!" : "Bid accepted!";
+            setMessage(message);
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            if (sold)
+                navigate(ROUTES.PROFILE);
         } catch (err: any) {
             setMessage(err.message || "Failed to place bid.");
         }

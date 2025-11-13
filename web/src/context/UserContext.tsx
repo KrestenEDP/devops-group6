@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type {Transaction} from "@customTypes/transaction.ts";
 
 // Only local login so far
 export interface User {
@@ -8,7 +7,6 @@ export interface User {
     email: string;
     role: string;
     token?: string;
-    transactions?: Transaction[];
 }
 
 interface UserContextProps {

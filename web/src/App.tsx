@@ -15,28 +15,31 @@ import {ArtistsProvider} from "./context/ArtistsContext.tsx";
 import {AuctionsProvider} from "./context/AuctionsContext.tsx";
 import {Profile} from "@features/profile/pages/Profile.tsx";
 import { NewArt } from "@features/paintings/pages/NewArt.tsx";
+import {TransactionsProvider} from "@context/TransactionContext.tsx";
 
 export function App() {
     return (
         <UserProvider>
-            <ArtistsProvider>
-                <AuctionsProvider>
-                    <Layout>
-                        <Routes>
-                            <Route path={ROUTES.GALLERY} element={<Gallery />} />
-                            <Route path={ROUTES.AUCTION_DETAIL()} element={<AuctionDetail />} />
-                            <Route path={ROUTES.LOGIN} element={<Login />} />
-                            <Route path={ROUTES.CREATE_ACCOUNT} element={<UserCreation />} />
-                            <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-                            <Route path={ROUTES.ARTISTS} element={<Artists />} />
-                            <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
-                            <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-                            <Route path={ROUTES.PROFILE} element={<Profile />} />
-                            <Route path={ROUTES.NEW_ART} element={<NewArt />} />
-                        </Routes>
-                    </Layout>
-                </AuctionsProvider>
-            </ArtistsProvider>
+        <TransactionsProvider>
+        <ArtistsProvider>
+        <AuctionsProvider>
+            <Layout>
+                <Routes>
+                    <Route path={ROUTES.GALLERY} element={<Gallery />} />
+                    <Route path={ROUTES.AUCTION_DETAIL()} element={<AuctionDetail />} />
+                    <Route path={ROUTES.LOGIN} element={<Login />} />
+                    <Route path={ROUTES.CREATE_ACCOUNT} element={<UserCreation />} />
+                    <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+                    <Route path={ROUTES.ARTISTS} element={<Artists />} />
+                    <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
+                    <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+                    <Route path={ROUTES.PROFILE} element={<Profile />} />
+                    <Route path={ROUTES.NEW_ART} element={<NewArt />} />
+                </Routes>
+            </Layout>
+        </AuctionsProvider>
+        </ArtistsProvider>
+        </TransactionsProvider>
         </UserProvider>
     );
 }

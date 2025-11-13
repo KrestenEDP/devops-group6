@@ -95,7 +95,6 @@ public class AuthController(
             user.Id,
             user.Email,
             Role = user.Role.ToString(),
-            Transactions = user.Transactions.Select(a => a.ToDto()).ToList()
         };
 
         return userDto;

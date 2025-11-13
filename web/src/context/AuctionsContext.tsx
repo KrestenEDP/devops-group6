@@ -29,7 +29,7 @@ export const { Provider: AuctionsProvider, useDataContext: useAuctions } =
     createDataContext<Auction>(fetchAuctions, "Auctions");
 
 export interface AuctionActions {
-    placeBid: (auctionId: string, amount: number) => Promise<void>;
+    placeBid: (auctionId: string, amount: number) => Promise<boolean>;
     createAuction: (data: AuctionCreateDto) => Promise<void>;
     updateAuction: (auctionId: string, data: Partial<Auction>) => Promise<void>;
 }
@@ -62,6 +62,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             a.id === auctionId ? { ...a, highestBid: amount, bidCount: a.bidCount+1 } : a
         );
         context.dispatch({ type: "SET_ITEMS", payload: updatedItems });
+        return await res.text() == "true";
     };
 
     const createAuction = async (data: AuctionCreateDto) => {

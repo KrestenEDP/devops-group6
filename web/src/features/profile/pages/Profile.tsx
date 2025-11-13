@@ -1,10 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@context/UserContext.tsx";
 import styles from "../styles/Profile.module.scss";
 import { ROUTES } from "@routes/routes";
 import { formatCurrency } from "@data/mockAuctions";
 import {parseRole, Role} from "@customTypes/Role.ts";
+import {useTransactions} from "@context/TransactionContext.tsx";
 
 export function Profile() {
 	const navigate = useNavigate();
@@ -13,8 +14,14 @@ export function Profile() {
 	const [name, setName] = useState(user?.name ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
-	console.log("User in Profile:", user);
-	console.log(isLoggedIn);
+
+	const { state: { items: transactions, loading, error }, load } = useTransactions();
+
+	// Load data on component mount
+	React.useEffect(() => {
+		load();
+	}, [load]);
+
 	if (!isLoggedIn) {
 		return (
 			<div className={styles.profilePage}>
@@ -52,8 +59,6 @@ export function Profile() {
 			.join("")
 			.toUpperCase();
 	}
-
-	const userTransactions = user?.transactions ?? [];
 	
 	return (
 		<div className={styles.profilePage}>
@@ -136,9 +141,12 @@ export function Profile() {
 
 			<div className={styles.purchaseSection}>
 				<h3>Your Purchases</h3>
-				{userTransactions.length > 0 ? (
+				{loading && <p>Loading purchases...</p>}
+				{error && <p>Error loading purchases: {error}</p>}
+				{!loading && !error && transactions.length === 0 && <p>No purchases found.</p>}
+				{!loading && transactions.length > 0 && (
 					<ul className={styles.purchaseList}>
-						{userTransactions.map((transaction) => {
+						{transactions.map((transaction) => {
 							const art = transaction.auction
 							if (!art) return null;
 
@@ -165,8 +173,6 @@ export function Profile() {
 							);
 						})}
 					</ul>
-				) : (
-					<p>You haven’t purchased any artwork yet.</p>
 				)}
 			</div>
 		</div>

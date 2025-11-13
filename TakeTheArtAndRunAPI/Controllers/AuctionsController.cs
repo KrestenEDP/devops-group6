@@ -115,12 +115,8 @@ public class AuctionsController(AppDbContext context) : ControllerBase
             _context.Transactions.Add(transaction);
         }
 
-        var message = sold ? "Bid accepted! The auction is now sold." : "Bid accepted!";
-        Console.WriteLine(message);
-        Console.WriteLine(sold);
-
         await _context.SaveChangesAsync();
-        return Ok(message);
+        return Ok(sold);
     }
 }
 
