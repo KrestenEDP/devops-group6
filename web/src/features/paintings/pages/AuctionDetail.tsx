@@ -3,7 +3,7 @@ import { useAuctionsActions} from "@context/AuctionsContext";
 import styles from "../styles/AuctionDetail.module.scss";
 import {ROUTES} from "@routes/routes.ts";
 import {ArrowLeft, Info, User, Users} from "lucide-react";
-import {formatCurrency} from "@features/paintings/mockData/mockAuctions.ts";
+import {formatCurrency} from "@data/mockAuctions.ts";
 import {Loading} from "@components/common/Loading/Loading.tsx";
 import React, {useState} from "react";
 
@@ -73,7 +73,7 @@ export function AuctionDetail() {
                     <div className={styles.infoSection}>
                         <div className={styles.titleSection}>
                             <h1 className={styles.paintingName}>{auction.title}</h1>
-                            <p className={styles.artistName}>{auction.artistId}</p>
+                            <p className={styles.artistName}>{auction.artistName}</p>
                         </div>
 
                         {/* Bid Card with primary gradient applied */}

@@ -1,7 +1,7 @@
 import { createDataContext } from "./createDataContext";
 import type { Artist } from "@customTypes/artist.ts";
 //import {handleApiResponse} from "@context/handleApiResponse.ts";
-import { mockArtists } from "@features/artists/mockData/mockArtists";
+import { mockArtists } from "@data/mockArtists.ts";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 if (!API_BASE) {

@@ -166,7 +166,7 @@ export function Profile() {
 									/>
 									<div className={styles.purchaseDetails}>
 										<h4>{art.title}</h4>
-										<p>by {art.artistId}</p>
+										<p>by {art.artistName}</p>
 										<p>
 											Purchased on{" "}
 											{new Date(purchase.purchasedAt).toLocaleString("da-DK", {

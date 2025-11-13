@@ -3,7 +3,7 @@ import { Users } from "lucide-react";
 import type { Auction } from "@customTypes/auction";
 import { ROUTES } from "@routes/routes";
 import styles from "../styles/Gallery.module.scss";
-import {formatCurrency} from "@features/paintings/mockData/mockAuctions.ts";
+import {formatCurrency} from "@data/mockAuctions.ts";
 
 interface AuctionCardProps {
     auction: Auction;
@@ -27,7 +27,7 @@ export function AuctionCard({ auction }: AuctionCardProps) {
                 <div className={styles.auctionInfo}>
                     <h3 className={styles.auctionTitle}>{auction.title}</h3>
                     <p className={styles.auctionArtist}>
-                        {auction.artistId}
+                        {auction.artistName}
                     </p>
 
                     <div className={styles.auctionDetails}>
