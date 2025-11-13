@@ -2,16 +2,17 @@ import {createDataContext, type DataAction, type DataState} from "./createDataCo
 import type { Auction } from "@customTypes/auction.ts";
 import React from "react";
 import {handleApiResponse} from "@context/handleApiResponse.ts";
-import { mockAuctions } from "@features/paintings/mockData/mockAuctions";
+//import { mockAuctions } from "@data/mockAuctions.ts";
+import type {AuctionCreateDto} from "@context/dtos/AuctionCreateDto.ts";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 
 // Fake API for demonstration
-const fetchAuctions = async () => {
+/*const fetchAuctions = async () => {
     return new Promise<Auction[]>((resolve) => setTimeout(() => resolve(mockAuctions), 500));
-};
+};*/
 
-/*const fetchAuctions = async (): Promise<Auction[]> => {
+const fetchAuctions = async (): Promise<Auction[]> => {
     const token = localStorage.getItem("token");
     const res = await fetch(`${API_BASE}/auctions`, {
         headers: {
@@ -22,13 +23,14 @@ const fetchAuctions = async () => {
 
     await handleApiResponse(res, "Failed to fetch auctions");
     return await res.json();
-};*/
+};
 
 export const { Provider: AuctionsProvider, useDataContext: useAuctions } =
     createDataContext<Auction>(fetchAuctions, "Auctions");
 
 export interface AuctionActions {
     placeBid: (auctionId: string, amount: number) => Promise<void>;
+    createAuction: (data: AuctionCreateDto) => Promise<void>;
     updateAuction: (auctionId: string, data: Partial<Auction>) => Promise<void>;
 }
 
@@ -36,7 +38,6 @@ export interface AuctionsContextType {
     state: DataState<Auction>;
     dispatch: React.Dispatch<DataAction<Auction>>;
     load: () => void;
-    placeBid: (auctionId: string, amount: number) => Promise<void>;
 }
 
 export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
@@ -63,6 +64,24 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
         context.dispatch({ type: "SET_ITEMS", payload: updatedItems });
     };
 
+    const createAuction = async (data: AuctionCreateDto) => {
+        const res = await fetch(`${API_BASE}/auctions/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify(data),
+        });
+
+        await handleApiResponse(res, "Failed to create auction");
+
+        const newAuction: Auction = await res.json();
+
+        const updatedItems = context.state.items.concat(newAuction);
+        context.dispatch({ type: "SET_ITEMS", payload: updatedItems });
+    };
+
     const updateAuction = async (auctionId: string, data: Partial<Auction>) => {
         const res = await fetch(`${API_BASE}/auctions/${auctionId}`, {
             method: "PUT",
@@ -79,5 +98,5 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
         context.dispatch({ type: "SET_ITEMS", payload: updatedItems });
     };
 
-    return { ...context, placeBid, updateAuction };
+    return { ...context, placeBid, createAuction, updateAuction };
 };

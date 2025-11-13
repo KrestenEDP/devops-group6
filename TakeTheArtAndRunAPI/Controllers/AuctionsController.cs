@@ -55,11 +55,11 @@ public class AuctionsController(AppDbContext context) : ControllerBase
             title: dto.Title,
             artistId: artist.Id,
             artistName: artist.Name,
+            artistBio: artist.Bio,
             imageUrl: dto.ImageUrl,
             limit: dto.Limit,
             medium: dto.Medium,
-            dimensions: dto.Dimensions,
-            artistBio: dto.ArtistBio
+            dimensions: dto.Dimensions
         );
 
         _context.Auctions.Add(newAuction);
@@ -89,7 +89,6 @@ public class AuctionsController(AppDbContext context) : ControllerBase
         auction.Limit = dto.Limit;
         auction.Medium = dto.Medium;
         auction.Dimensions = dto.Dimensions;
-        auction.ArtistBio = dto.ArtistBio;
 
         await _context.SaveChangesAsync();
         return Ok();
@@ -117,6 +116,8 @@ public class AuctionsController(AppDbContext context) : ControllerBase
         }
 
         var message = sold ? "Bid accepted! The auction is now sold." : "Bid accepted!";
+        Console.WriteLine(message);
+        Console.WriteLine(sold);
 
         await _context.SaveChangesAsync();
         return Ok(message);

@@ -29,6 +29,9 @@ public class AuthController(
             Role = UserRole.User,
         };
 
+        if (await userManager.FindByEmailAsync(dto.Email) != null)
+            return BadRequest(new { message = "Email is already registered." });
+
         var result = await userManager.CreateAsync(user, dto.Password);
         if (!result.Succeeded)
             return BadRequest(result.Errors);

@@ -4,12 +4,14 @@ export interface DataState<T> {
     items: T[];
     loading: boolean;
     error: string | null;
+    loaded: boolean;
 }
 
 export type DataAction<T> =
     | { type: "SET_ITEMS"; payload: T[] }
     | { type: "SET_LOADING"; payload: boolean }
-    | { type: "SET_ERROR"; payload: string | null };
+    | { type: "SET_ERROR"; payload: string | null }
+    | { type: "SET_LOADED"; payload: boolean };
 
 
 export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string) {
@@ -19,13 +21,19 @@ export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string)
         load: () => void;
     } | undefined>(undefined);
 
-    const initialState: DataState<T> = { items: [], loading: false, error: null };
+    const initialState: DataState<T> = {
+        items: [],
+        loading: false,
+        error: null,
+        loaded: false
+    };
 
     const reducer = (state: DataState<T>, action: DataAction<T>): DataState<T> => {
         switch (action.type) {
-            case "SET_ITEMS": return { ...state, items: action.payload, loading: false, error: null };
+            case "SET_ITEMS": return { ...state, items: action.payload, loading: false, error: null, loaded: true };
             case "SET_LOADING": return { ...state, loading: action.payload };
-            case "SET_ERROR": return { ...state, error: action.payload, loading: false };
+            case "SET_ERROR": return { ...state, error: action.payload, loading: false, loaded: false };
+            case "SET_LOADED": return { ...state, loaded: action.payload };
             default: return state;
         }
     };
@@ -41,7 +49,7 @@ export function createDataContext<T>(apiFetch: () => Promise<T[]>, name: string)
         }
 
         const load = () => {
-            if (state.items.length === 0 && !state.loading && !state.error) {
+            if (state.items.length === 0 && !state.loading && !state.error && !state.loaded) {
                 fetchData();
             }
         };

@@ -4,4 +4,5 @@ export type Artist = {
     imageUrl: string;
     email: string;
     bio: string;
+    userId: string;
 };

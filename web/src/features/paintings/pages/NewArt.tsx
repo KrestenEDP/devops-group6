@@ -1,46 +1,60 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../styles/NewArt.module.scss";
+import {useAuctionsActions} from "@context/AuctionsContext.tsx";
 
 export function NewArt() {
 	const [title, setTitle] = useState("");
+	const [imageUrl, setImageUrl] = useState("");
 	const [medium, setMedium] = useState("");
-	const [condition, setCondition] = useState("");
-	const [price, setPrice] = useState<number | "">("");
+	const [price, setPrice] = useState<number>(0);
 	const [dimensions, setDimensions] = useState("");
 
-	const fileInputRef = useRef<HTMLInputElement | null>(null);
-	const previewRef = useRef<string | null>(null);
-	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-	function handleUploadClick(e: React.MouseEvent) {
+	const { createAuction } = useAuctionsActions();
+
+	/*const fileInputRef = useRef<HTMLInputElement | null>(null);
+	const previewRef = useRef<string | null>(null);
+	const [previewUrl, setPreviewUrl] = useState<string | null>(null);*/
+
+	/*function handleUploadClick(e: React.MouseEvent) {
 		e.preventDefault();
 		fileInputRef.current?.click();
-	}
+	}*/
 
-	function handleSubmit(e: React.FormEvent) {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		console.log({ title, medium, dimensions, condition, price });
-		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, dimensions ,condition, price }, null, 2));
-		//TODO: implement actual submission logic here, not just alert
+		console.log({ title, medium, dimensions, price });
+		alert("Submitted (placeholder)\n" + JSON.stringify({ title, medium, dimensions, price }, null, 2));
+		try {
+			await createAuction({
+				title,
+				imageUrl,
+				medium,
+				dimensions,
+				limit: price,
+			});
+		} catch (err: any) {
+			alert(err.message || "Failed to create auction.");
+		}
 	}
 
 	// cleanup object URL on unmount
-	useEffect(() => {
+	/*useEffect(() => {
 		return () => {
 			if (previewRef.current) {
-				try { URL.revokeObjectURL(previewRef.current); } catch {}
+				try { URL.revokeObjectURL(previewRef.current); } catch { /!* empty *!/ }
 			}
 		};
-	}, []);
+	}, []);*/
 
 	return (
 		<div className={styles.newArtPageCentered}>
 			<div className={styles.artFormBox}>
+				{/*
 				<div className={styles.uploadBox}>
 					{previewUrl ? (
 						// show preview image, clicking it re-opens file picker
-						// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 						<img
 							src={previewUrl}
 							alt={title || "preview"}
@@ -64,7 +78,7 @@ export function NewArt() {
 								if (previewRef.current) {
 									try {
 										URL.revokeObjectURL(previewRef.current);
-									} catch {}
+									} catch { }
 								}
 								const url = URL.createObjectURL(f);
 								previewRef.current = url;
@@ -80,6 +94,7 @@ export function NewArt() {
 						}}
 					/>
 				</div>
+				*/}
 
 				<form className={styles.formFields} onSubmit={handleSubmit}>
 					<label className={styles.label}>Title:</label>
@@ -88,6 +103,14 @@ export function NewArt() {
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder="Title of artwork"
+					/>
+
+					<label className={styles.label}>Image Url:</label>
+					<input
+						className={styles.input}
+						value={imageUrl}
+						onChange={(e) => setImageUrl(e.target.value)}
+						placeholder="Url for image of artwork" // TODO: implement image upload in backend
 					/>
 
 					<label className={styles.label}>Medium:</label>
@@ -118,29 +141,13 @@ export function NewArt() {
 						placeholder="50cm x 70cm"
 					/>
 
-					<label className={styles.label}>Condition:</label>
-					<input
-						className={styles.input}
-						value={condition}
-						onChange={(e) => setCondition(e.target.value)}
-						placeholder="e.g. Excellent, Good, Fair, Poor"
-					/>
-
 					<label className={styles.label}>Secret Price:</label>
 					<input
 						className={styles.input}
 						type="number"
-						min="0"
+						min={0}
 						value={price}
-						onChange={(e) => {
-							const v = e.target.value;
-							if (v === "") {
-								setPrice("");
-								return;
-							}
-							const n = Number(v);
-							if (!Number.isNaN(n)) setPrice(n);
-						}}
+						onChange={(e) => setPrice(Number(e.target.value))}
 						placeholder="100000"
 					/>
 

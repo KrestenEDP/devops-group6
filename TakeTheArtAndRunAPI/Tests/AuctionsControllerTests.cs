@@ -112,7 +112,6 @@ public class AuctionsControllerTests
             Limit = 150m,
             Medium = "Watercolor",
             Dimensions = "40x40",
-            ArtistBio = "Bio"
         };
         var testArtist = new Artist
         {
@@ -133,6 +132,7 @@ public class AuctionsControllerTests
         Assert.Equal("New Auction", auction.Title);
         Assert.NotNull(createdAuction);
         Assert.Equal("New Auction", createdAuction.Title);
+        Assert.Equal(testArtist.Bio, createdAuction.ArtistBio);
     }
 
     [Fact]
@@ -145,8 +145,7 @@ public class AuctionsControllerTests
             ImageUrl = auction.ImageUrl,
             Limit = auction.Limit,
             Medium = auction.Medium,
-            Dimensions = auction.Dimensions,
-            ArtistBio = auction.ArtistBio
+            Dimensions = auction.Dimensions
         };
 
         var result = await _controller.UpdateAuctionAsync(auction.Id, dto);
@@ -210,8 +209,7 @@ public class AuctionsControllerTests
             ImageUrl = auction.ImageUrl,
             Limit = auction.Limit,
             Medium = auction.Medium,
-            Dimensions = auction.Dimensions,
-            ArtistBio = auction.ArtistBio
+            Dimensions = auction.Dimensions
         };
 
         // Act

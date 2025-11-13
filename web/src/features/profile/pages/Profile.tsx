@@ -1,30 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@context/UserContext.tsx";
 import styles from "../styles/Profile.module.scss";
-import { useArtists } from "@context/ArtistsContext.tsx";
 import { ROUTES } from "@routes/routes";
-import { mockPurchases } from "@data/mockPurchases";
-import { mockAuctions, formatCurrency } from "@data/mockAuctions";
+import { formatCurrency } from "@data/mockAuctions";
+import {parseRole, Role} from "@customTypes/Role.ts";
 
 export function Profile() {
 	const navigate = useNavigate();
-	const { user, isLoggedIn, login, logout } = useUser();
-	const { state: { items: artists}, load } = useArtists();
-
-	const userArtistProfile = artists.find(artist => artist.email === user?.email);
-	//TODO: fix naive approach of artist email = artist
-
-	useEffect(() => {
-		load();
-	}, [load]);
+	const { user, isLoggedIn, logout } = useUser();
 
 	const [name, setName] = useState(user?.name ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
-
-
-
+	console.log("User in Profile:", user);
+	console.log(isLoggedIn);
 	if (!isLoggedIn) {
 		return (
 			<div className={styles.profilePage}>
@@ -48,10 +38,7 @@ export function Profile() {
 		}
 
 		// Update the user in context (and localStorage via context)
-		login({
-			id: user!.id, name, email
-
-		});
+		// TODO: Implement actual API call to update user profile
 		setMessage("Profile updated.");
 		setTimeout(() => setMessage(null), 2000);
 	}
@@ -66,8 +53,7 @@ export function Profile() {
 			.toUpperCase();
 	}
 
-	// ✅ Find purchases for this user
-	const userPurchases = mockPurchases.filter((p) => p.userId === user?.id);
+	const userTransactions = user?.transactions ?? [];
 	
 	return (
 		<div className={styles.profilePage}>
@@ -124,15 +110,17 @@ export function Profile() {
 						>
 							Reset
 						</button>
-						<button className={styles.primaryBtn} onClick={handleSave}>
+						<button className={styles.primaryBtn} onClick={
+							handleSave
+						}>
 							Save
 						</button>
 					</div>
 
 					{message && <p role="status">{message}</p>}
-				</div>			
-				
-				{userArtistProfile && (
+				</div>
+
+				{(user != null && parseRole(user.role) == Role.Artist) && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}
@@ -146,19 +134,16 @@ export function Profile() {
 			)}
 			</div>
 
-
-
-			{/* ✅ PURCHASE HISTORY SECTION */}
 			<div className={styles.purchaseSection}>
 				<h3>Your Purchases</h3>
-				{userPurchases.length > 0 ? (
+				{userTransactions.length > 0 ? (
 					<ul className={styles.purchaseList}>
-						{userPurchases.map((purchase) => {
-							const art = mockAuctions.find((a) => a.id === purchase.paintingId);
+						{userTransactions.map((transaction) => {
+							const art = transaction.auction
 							if (!art) return null;
 
 							return (
-								<li key={purchase.id} className={styles.purchaseItem}>
+								<li className={styles.purchaseItem}>
 									<img
 										src={art.imageUrl}
 										alt={art.title}
@@ -169,12 +154,12 @@ export function Profile() {
 										<p>by {art.artistName}</p>
 										<p>
 											Purchased on{" "}
-											{new Date(purchase.purchasedAt).toLocaleString("da-DK", {
+											{new Date(transaction.date).toLocaleString("da-DK", {
 												dateStyle: "medium",
 												timeStyle: "short",
 											})}
 										</p>
-										<p>Purchased for {formatCurrency(purchase.price)}</p>
+										<p>Purchased for {formatCurrency(transaction.amount)}</p>
 									</div>
 								</li>
 							);

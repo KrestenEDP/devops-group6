@@ -8,6 +8,7 @@ public class Auction
 
     public Guid ArtistId { get; private set; }
     public string ArtistName { get; set; } = string.Empty;
+    public string ArtistBio { get; set; } = string.Empty;
     public Artist? Artist { get; private set; } // navigation
     public string Title { get; set; } = string.Empty;
     public string ImageUrl { get; set; } = string.Empty;
@@ -16,7 +17,6 @@ public class Auction
     public int BidCount { get; private set; } = 0;
     public string Medium { get; set; } = string.Empty;
     public string Dimensions { get; set; } = string.Empty;
-    public string ArtistBio { get; set; } = string.Empty;
     public Boolean IsSold { get; private set; } = false;
 
     private Auction() { }
