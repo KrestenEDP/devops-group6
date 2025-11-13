@@ -1,3 +1,5 @@
+@use '@/features/paintings/styles/shared' as shared;
+
 .artistDetailContainer {
   display: flex;
   flex-direction: column;
@@ -49,4 +51,73 @@
 .artistDetailNotFound {
   font-size: 1.2rem;
   color: #b00;
+}
+
+.artSection {
+  margin-top: 2rem;
+
+  h3 {
+    font-family: shared.$font-family-heading;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: shared.$color-text;
+    text-align: center;
+  }
+
+  p {
+    font-family: shared.$font-family-heading;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: shared.$color-text;
+    text-align: center;
+  }
+
+  .artList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .artItem {
+    @include shared.card;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 40px rgba(10, 61, 98, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .artImage {
+      width: 100%;
+      height: auto; // let height scale naturally
+      object-fit: contain; // ensures full painting is visible
+      background: #f0f0f0;
+      max-height: 400px; // optional: limit card height for consistency
+    }
+
+    .artDetails {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 {
+        font-family: shared.$font-family-heading;
+        font-size: 1.75rem;
+        margin: 0;
+        color: shared.$color-text;
+      }
+
+      p {
+        color: shared.$color-subtext;
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+  }
 }

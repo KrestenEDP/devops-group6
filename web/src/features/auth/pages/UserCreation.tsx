@@ -26,7 +26,7 @@ export function UserCreation() {
         try {
             await register(email, password); // your context handles backend call
             setMessage("Account created! Redirecting to login...");
-            setTimeout(() => navigate(ROUTES.LOGIN), 1000);
+            setTimeout(() => navigate(ROUTES.GALLERY), 1000);
         } catch (err: any) {
             setMessage(err.message || "Failed to create account.");
         } finally {

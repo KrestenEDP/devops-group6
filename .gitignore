@@ -40,3 +40,5 @@ build/
 /.vs
 /TakeTheArtAndRunAPI/out
 /TakeTheArtAndRunAPI/Migrations
+TakeTheArtAndRunAPI/TakeTheArtAndRun.db-wal
+TakeTheArtAndRunAPI/TakeTheArtAndRun.db-shm
