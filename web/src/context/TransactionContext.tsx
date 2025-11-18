@@ -1,5 +1,5 @@
-import { createDataContext } from "./createDataContext";
-import {handleApiResponse} from "@context/handleApiResponse.ts";
+import { createDataContext } from "./util/createDataContext.tsx";
+import {handleApiResponse} from "@context/util/handleApiResponse.ts";
 import type {Transaction} from "@customTypes/transaction.ts";
 
 const API_BASE = import.meta.env.VITE_API_URL;

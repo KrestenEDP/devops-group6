@@ -1,4 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {createContext, useContext, useState, type ReactNode, useEffect, useCallback} from "react";
+import {setLogoutHandler} from "@context/util/usersession.ts";
+import {validateToken} from "@context/util/validateToken.ts";
 
 // Only local login so far
 export interface User {
@@ -22,14 +24,7 @@ const API_BASE = import.meta.env.VITE_API_URL;
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(() => {
-        try {
-            const raw = localStorage.getItem("user");
-            return raw ? (JSON.parse(raw) as User) : null;
-        } catch {
-            return null;
-        }
-    });
+    const [user, setUser] = useState<User | null>(null);
 
     const saveUser = (token: string, userData: User) => {
         const fullUser = { ...userData, token };
@@ -83,15 +78,49 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         saveUser(data.token, data.user);
     }
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setUser(null);
         try {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
         } catch { /* empty */ }
-    };
+
+        alert("You have been logged out.");
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const rawUser = localStorage.getItem("user");
+                const token = localStorage.getItem("token");
+
+                console.log("User: " + rawUser);
+                console.log("Token: " + token);
+
+                if (!token || !rawUser) {
+                    logout();
+                    return;
+                }
+
+                const validUser = await validateToken(token);
+                if (validUser) {
+                    console.log("Validated User: " + JSON.stringify(validUser));
+                    setUser({ ...validUser, token });
+                } else {
+                    console.log("Token validation failed.");
+                    logout();
+                }
+            } catch {
+                logout();
+            }
+        })();
+    }, [logout]);
 
     const isLoggedIn = !!user;
+
+    useEffect(() => {
+        setLogoutHandler(logout);
+    }, [logout]);
 
     return (
         <UserContext.Provider value={{ user, login, register, logout, isLoggedIn}}>
