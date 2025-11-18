@@ -9,14 +9,14 @@ export function UserCreation() {
     const { register } = useUser();
 
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        if (!email || !username || !password) {
+        if (!email || !userName || !password) {
             setMessage("Please fill all fields.");
             return;
         }
@@ -24,7 +24,7 @@ export function UserCreation() {
         setMessage(null);
 
         try {
-            await register(email, password); // your context handles backend call
+            await register(userName, email, password); // your context handles backend call
             setMessage("Account created! Redirecting to login...");
             setTimeout(() => navigate(ROUTES.GALLERY), 1000);
         } catch (err: any) {
@@ -72,9 +72,9 @@ export function UserCreation() {
                                 id="username"
                                 name="username"
                                 placeholder="Choose a username"
-                                value={username}
+                                value={userName}
                                 onChange={(e) => {
-                                    setUsername(e.target.value);
+                                    setUserName(e.target.value);
                                     setMessage(null);
                                 }}
                                 autoComplete="username"

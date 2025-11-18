@@ -11,7 +11,7 @@ export function Profile() {
 	const navigate = useNavigate();
 	const { user, isLoggedIn, logout } = useUser();
 
-	const [name, setName] = useState(user?.name ?? "");
+	const [userName, setUserName] = useState(user?.userName ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
 
@@ -39,7 +39,7 @@ export function Profile() {
 	}
 
 	function handleSave() {
-		if (!name || !email) {
+		if (!userName || !email) {
 			setMessage("Name and email are required.");
 			return;
 		}
@@ -71,9 +71,9 @@ export function Profile() {
 					}}
 				>
 					<div className={styles.profileHeader} style={{ marginBottom: 0 }}>
-						<div className={styles.avatar}>{initials(user?.name)}</div>
+						<div className={styles.avatar}>{initials(user?.userName)}</div>
 						<div>
-							<h2>{user?.name}</h2>
+							<h2>{user?.userName}</h2>
 							<div>{user?.email}</div>
 						</div>
 					</div>
@@ -93,8 +93,8 @@ export function Profile() {
 					<div className={styles.formRow}>
 						<input
 							className={styles.input}
-							value={name}
-							onChange={(e) => setName(e.target.value)}
+							value={userName}
+							onChange={(e) => setUserName(e.target.value)}
 							placeholder="Full Name"
 						/>
 						<input
@@ -109,7 +109,7 @@ export function Profile() {
 						<button
 							className={styles.secondaryBtn}
 							onClick={() => {
-								setName(user?.name ?? "");
+								setUserName(user?.userName ?? "");
 								setEmail(user?.email ?? "");
 							}}
 						>

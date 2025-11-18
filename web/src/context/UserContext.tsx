@@ -3,7 +3,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 // Only local login so far
 export interface User {
     id: string;
-    name: string;
+    userName: string;
     email: string;
     role: string;
     token?: string;
@@ -13,7 +13,7 @@ interface UserContextProps {
     user: User | null;
     isLoggedIn: boolean;
     login: (email: string, password: string) => Promise<void>;
-    register: (email: string, password: string) => Promise<void>;
+    register: (userName: string, email: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
@@ -58,11 +58,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         saveUser(data.token, data.user);
     };
 
-    const register = async (email: string, password: string) => {
+    const register = async (userName: string, email: string, password: string) => {
         const res = await fetch(`${API_BASE}/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ userName, email, password }),
         });
 
         if (!res.ok) {
