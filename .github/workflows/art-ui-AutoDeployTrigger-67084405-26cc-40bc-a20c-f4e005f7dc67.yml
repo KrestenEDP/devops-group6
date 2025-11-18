@@ -1,0 +1,49 @@
+name: Trigger auto deployment for art-ui
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/art-ui-AutoDeployTrigger-67084405-26cc-40bc-a20c-f4e005f7dc67.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ARTUI_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARTUI_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.ARTUI_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}/web
+          _dockerfilePathKey_: _dockerfilePath_
+          _targetLabelKey_: _targetLabel_
+          registryUrl: taketheartandrun.azurecr.io
+          registryUsername: ${{ secrets.ARTUI_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.ARTUI_REGISTRY_PASSWORD }}
+          containerAppName: art-ui
+          resourceGroup: TakeTheArtAndRun
+          imageToBuild: taketheartandrun.azurecr.io/art-ui:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+

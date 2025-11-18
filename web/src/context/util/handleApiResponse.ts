@@ -14,10 +14,10 @@ export async function handleApiResponse(
         errorMessage = "You don’t have permission to perform this action.";
     } else {
         try {
-            const data = await res.json();
+            const data = await res.clone().json();
             if (data?.message) errorMessage = data.message;
         } catch {
-            const text = await res.text();
+            const text = await res.clone().text();
             if (text) errorMessage = text;
         }
     }
