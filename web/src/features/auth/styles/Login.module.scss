@@ -1,0 +1,154 @@
+/* Pages */
+.loginPage,
+.userCreationPage,
+.forgotPasswordPage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fafaf8, #f5f3f0);
+}
+
+/* Containers */
+.loginContainer,
+.userCreationContainer,
+.forgotPasswordContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Forms */
+.loginForm,
+.userCreationForm,
+.forgotPasswordForm {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.loginForm h1,
+.userCreationForm h1,
+.forgotPasswordForm h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+/* Form groups */
+.loginFormGroup {
+    margin-bottom: 20px;
+}
+
+.loginFormGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.loginFormGroup input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.loginFormGroup input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Primary buttons */
+.loginButton,
+.createAccountButton,
+.resetPasswordButton {
+    width: 100%;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.loginButton:hover,
+.createAccountButton:hover,
+.resetPasswordButton:hover {
+    background-color: #357abd;
+}
+
+/* Secondary buttons */
+.loginSecondaryButton {
+    background-color: transparent;
+    color: #4a90e2;
+    border: 1px solid #4a90e2;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 5px;
+}
+
+.loginSecondaryButton:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+/* Container for multiple buttons */
+.loginButtonsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+/* Form header */
+.loginFormHeader {
+    position: relative;
+    margin-bottom: 30px;
+    padding-top: 30px;
+}
+
+.loginFormHeader h1 {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* Back button */
+.loginBackButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(74, 144, 226, 0.1);
+    border: none;
+    border-radius: 4px;
+    color: #4a90e2;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.loginBackButton:hover {
+    color: #357abd;
+    background-color: rgba(74, 144, 226, 0.2);
+}

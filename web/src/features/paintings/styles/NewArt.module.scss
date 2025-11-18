@@ -1,0 +1,98 @@
+
+.newArtPageCentered {
+	min-height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f7f7f7;
+}
+
+.artFormBox {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+	padding: 32px 32px 24px 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 400px;
+	max-width: 600px;
+	width: 100%;
+	gap: 24px;
+}
+
+
+.formFields {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.uploadBox {
+	width: 280px;
+	height: 280px;
+	background: #d9d9d9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border-radius: 8px;
+	margin-bottom: 18px;
+}
+
+.previewImage {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.submitBtn {
+	margin-top: 18px;
+	background: #4a90e2;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 12px 0;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	width: 100%;
+	transition: background 0.2s;
+}
+.submitBtn:hover {
+	background: #357abd;
+}
+
+.uploadLink {
+	color: #0044cc;
+	text-decoration: underline;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+
+
+.note {
+	text-align: right;
+	font-style: italic;
+	font-size: 0.9rem;
+	color: #444;
+	margin-bottom: 16px;
+}
+
+.label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #222;
+}
+
+.input {
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: #eee;
+	width: 200px;
+}

@@ -1,0 +1,154 @@
+@use './_shared' as shared;
+
+.galleryPage {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fafaf8, #f5f3f0);
+}
+
+.mainContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.heroSection {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .heroTitle {
+        font-size: 3rem;
+        font-weight: bold;
+        font-family: shared.$font-family-heading;
+        margin-bottom: 1rem;
+        color: shared.$color-text;
+    }
+
+    .heroSubtitle {
+        font-size: 1.25rem;
+        color: shared.$color-subtext;
+    }
+}
+
+.auctionsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.auctionCardLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.auctionCard {
+    @include shared.card;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 10px 40px rgba(10, 61, 98, 0.25);
+        transform: translateY(-4px);
+    }
+
+    .auctionImageContainer {
+        aspect-ratio: 3/4;
+        background: #f0f0f0;
+        overflow: hidden;
+    }
+
+    .auctionImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .auctionInfo {
+        padding: 1.5rem;
+
+        .auctionTitle {
+            font-size: 1.25rem;
+            font-weight: bold;
+            font-family: shared.$font-family-heading;
+            margin-bottom: 0.25rem;
+            color: shared.$color-text;
+        }
+
+        .auctionArtist {
+            color: shared.$color-subtext;
+            margin-bottom: 1rem;
+        }
+
+        .auctionDetails {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+
+            .bidInfo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .bidLabel {
+                    font-size: 0.875rem;
+                    color: shared.$color-subtext;
+                }
+
+                .bidAmount {
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    color: shared.$color-primary;
+                }
+            }
+
+            .bidStats {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.875rem;
+
+                .statItem {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+                    color: shared.$color-subtext;
+
+                    .statIcon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+
+            .bidButton {
+                width: 100%;
+                padding: 0.75rem;
+                background: shared.$color-gradient-primary;
+                color: shared.$color-text;
+                border-radius: 6px;
+                font-weight: 600;
+                font-size: 0.875rem;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+
+                &:hover {
+                    transform: scale(1.02);
+                    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .auctionsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .heroSection {
+        .heroTitle {
+            font-size: 2rem;
+        }
+        .heroSubtitle {
+            font-size: 1rem;
+        }
+    }
+}

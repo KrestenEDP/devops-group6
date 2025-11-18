@@ -1,0 +1,123 @@
+@use '@/features/paintings/styles/shared' as shared;
+
+.artistDetailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.artistDetailCard {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  background: #fff;
+  padding: 32px 40px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.artistDetailImage {
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  margin-bottom: 24px;
+  border: 4px solid #eee;
+}
+
+.artistDetailName {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.artistDetailBio {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 0;
+}
+
+.artistDetailBack {
+  margin-bottom: 30px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.artistDetailNotFound {
+  font-size: 1.2rem;
+  color: #b00;
+}
+
+.artSection {
+  margin-top: 2rem;
+
+  h3 {
+    font-family: shared.$font-family-heading;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: shared.$color-text;
+    text-align: center;
+  }
+
+  p {
+    font-family: shared.$font-family-heading;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: shared.$color-text;
+    text-align: center;
+  }
+
+  .artList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .artItem {
+    @include shared.card;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 40px rgba(10, 61, 98, 0.25);
+      transform: translateY(-4px);
+    }
+
+    .artImage {
+      width: 100%;
+      height: auto; // let height scale naturally
+      object-fit: contain; // ensures full painting is visible
+      background: #f0f0f0;
+      max-height: 400px; // optional: limit card height for consistency
+    }
+
+    .artDetails {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h4 {
+        font-family: shared.$font-family-heading;
+        font-size: 1.75rem;
+        margin: 0;
+        color: shared.$color-text;
+      }
+
+      p {
+        color: shared.$color-subtext;
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+  }
+}
