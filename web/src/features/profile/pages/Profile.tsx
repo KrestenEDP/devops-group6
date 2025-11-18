@@ -4,7 +4,7 @@ import { useUser } from "@context/UserContext.tsx";
 import styles from "../styles/Profile.module.scss";
 import { ROUTES } from "@routes/routes";
 import { formatCurrency } from "@data/mockAuctions";
-import {parseRole, Role} from "@customTypes/Role.ts";
+import {parseRole, Roles} from "@customTypes/Role.ts";
 import {useTransactions} from "@context/TransactionContext.tsx";
 
 export function Profile() {
@@ -125,7 +125,7 @@ export function Profile() {
 					{message && <p role="status">{message}</p>}
 				</div>
 
-				{(user != null && parseRole(user.role) == Role.Artist) && (
+				{(user != null && parseRole(user.role) == Roles.Artist) && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}

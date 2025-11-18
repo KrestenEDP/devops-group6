@@ -5,7 +5,7 @@ yarn-error.log*
 .git
 .gitignore
 README.md
-.env
+.env.development
 .nyc_output
 coverage
 .cache

@@ -7,13 +7,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production --silent
+RUN npm ci --silent
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN npm run build -- --mode=production
 
 # Stage 2: Serve the application with nginx
 FROM nginx:alpine

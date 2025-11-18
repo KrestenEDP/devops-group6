@@ -21,4 +21,4 @@ USER reactjs
 EXPOSE 5173
 
 # Run the Vite dev server
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev", "--", "--host", "--mode=development"]
