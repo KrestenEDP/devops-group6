@@ -43,7 +43,7 @@ export function AuctionDetail() {
 
         try {
             const sold = await placeBid(auction.id, Number(bidAmount));
-            const message = sold ? "Bid accepted! Congratulations, you bought the painting!" : "Bid accepted!";
+            const message = sold ? "Congratulations, you bought the painting!" : "You unfortunately didn't bid enough to get the painting";
             setMessage(message);
             await new Promise(resolve => setTimeout(resolve, 1500));
             if (sold)
