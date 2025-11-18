@@ -138,7 +138,7 @@ export function Profile() {
 				</div>
 			)}
 
-			{(user != null && parseRole(user.role) == Role.Admin) && (
+			{(user != null && parseRole(user.role) == Roles.Admin) && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}

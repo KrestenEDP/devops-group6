@@ -1,6 +1,6 @@
 # Multi-stage build for React frontend
 # Stage 1: Build the React application
-FROM node:22 as build
+FROM node:22 AS build
 WORKDIR /app
 
 # Copy package files
