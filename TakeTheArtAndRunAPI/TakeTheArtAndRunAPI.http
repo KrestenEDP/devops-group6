@@ -1,6 +1,0 @@
-@TakeTheArtAndRunAPI_HostAddress = http://localhost:5229
-
-GET {{TakeTheArtAndRunAPI_HostAddress}}/auctions/
-Accept: application/json
-
-###
