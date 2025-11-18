@@ -7,6 +7,7 @@ import { UserCreation } from "@features/auth/pages/UserCreation";
 import { ForgotPassword } from "@features/auth/pages/ForgotPassword";
 import { Artists } from "@features/artists/pages/Artists";
 import { ArtistDetail } from "@features/artists/pages/ArtistDetail";
+import { Admin } from "@features/admin/pages/Admin.tsx";
 import { NotFound } from "@components/common/NotFound/NotFound";
 import { ROUTES } from "./routes/routes";
 import "./styles/App.scss";
@@ -35,6 +36,7 @@ export function App() {
                     <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                     <Route path={ROUTES.PROFILE} element={<Profile />} />
                     <Route path={ROUTES.NEW_ART} element={<NewArt />} />
+                    <Route path={ROUTES.ADMIN} element={<Admin />} />
                 </Routes>
             </Layout>
         </AuctionsProvider>

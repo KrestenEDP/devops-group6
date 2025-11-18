@@ -137,6 +137,19 @@ export function Profile() {
 					</button>
 				</div>
 			)}
+
+			{(user != null && parseRole(user.role) == Role.Admin) && (
+				<div className={styles.buttonContainer}>
+					<button
+						className={styles.greenBtn}
+						onClick={() => {
+							navigate(ROUTES.ADMIN);
+						}}
+					>
+						Admin
+					</button>
+				</div>
+			)}
 			</div>
 
 			<div className={styles.purchaseSection}>
