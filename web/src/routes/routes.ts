@@ -9,4 +9,5 @@ export const ROUTES = {
     ARTIST_DETAIL: (id: string | number = ":artistId") => `/artists/${id}`,
     PROFILE: "/profile",
     NEW_ART: "/new-auction",
+    ADMIN: "/admin",
 } as const;
