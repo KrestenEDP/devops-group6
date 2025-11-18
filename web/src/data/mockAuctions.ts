@@ -10,7 +10,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 23,
         medium: "Oil on canvas",
         dimensions: "73.7 cm × 92.1 cm",
-        artistBio: "Claude Monet was a founder of French Impressionist painting, and the most consistent and prolific practitioner of the movement's philosophy."
+        artistBio: "Claude Monet was a founder of French Impressionist painting, and the most consistent and prolific practitioner of the movement's philosophy.",
+        isSold: false
     },
     {
         id: "2",
@@ -21,7 +22,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 45,
         medium: "Oil on canvas",
         dimensions: "44.5 cm × 39 cm",
-        artistBio: "Johannes Vermeer was a Dutch Baroque Period painter who specialized in domestic interior scenes of middle class life."
+        artistBio: "Johannes Vermeer was a Dutch Baroque Period painter who specialized in domestic interior scenes of middle class life.",
+        isSold: false
     },
     {
         id: "3",
@@ -32,7 +34,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 31,
         medium: "Watercolor on paper",
         dimensions: "30.5 cm × 48.7 cm",
-        artistBio: "Joseph Mallord William Turner was an English Romantic painter, printmaker and watercolourist, known for his expressive colourisation."
+        artistBio: "Joseph Mallord William Turner was an English Romantic painter, printmaker and watercolourist, known for his expressive colourisation.",
+        isSold: false
     },
     {
         id: "4",
@@ -43,7 +46,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 28,
         medium: "Oil and tempera on canvas",
         dimensions: "140 cm × 201 cm",
-        artistBio: "Wassily Kandinsky was a Russian painter and art theorist, generally credited as the pioneer of abstract art."
+        artistBio: "Wassily Kandinsky was a Russian painter and art theorist, generally credited as the pioneer of abstract art.",
+        isSold: false
     },
     {
         id: "5",
@@ -54,7 +58,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 19,
         medium: "Oil on canvas",
         dimensions: "81 cm × 92 cm",
-        artistBio: "Claude Monet's garden at Giverny is the inspiration for many of his most famous paintings, particularly his water lily series."
+        artistBio: "Claude Monet's garden at Giverny is the inspiration for many of his most famous paintings, particularly his water lily series.",
+        isSold: false
     },
     {
         id: "6",
@@ -65,7 +70,8 @@ export const mockAuctions: Auction[] = [
         bidCount: 26,
         medium: "Oil on canvas",
         dimensions: "65 cm × 81 cm",
-        artistBio: "Paul Cézanne was a French artist and Post-Impressionist painter whose work laid the foundations of modern art."
+        artistBio: "Paul Cézanne was a French artist and Post-Impressionist painter whose work laid the foundations of modern art.",
+        isSold: false
     },
 ];
 
