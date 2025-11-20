@@ -79,13 +79,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const logout = useCallback(() => {
+        if (!user || localStorage.getItem("token") === null) {
+            alert("You have been logged out.");
+        }
         setUser(null);
         try {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
         } catch { /* empty */ }
 
-        alert("You have been logged out.");
     }, []);
 
     useEffect(() => {
