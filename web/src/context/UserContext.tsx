@@ -79,13 +79,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const logout = useCallback(() => {
+        if (user != null || localStorage.getItem("token") != null) {
+            alert("You have been logged out.");
+        }
         setUser(null);
         try {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
         } catch { /* empty */ }
 
-        alert("You have been logged out.");
     }, []);
 
     useEffect(() => {
@@ -93,9 +95,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             try {
                 const rawUser = localStorage.getItem("user");
                 const token = localStorage.getItem("token");
-
-                console.log("User: " + rawUser);
-                console.log("Token: " + token);
 
                 if (!token || !rawUser) {
                     logout();
