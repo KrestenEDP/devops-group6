@@ -5,7 +5,10 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+
+    /* Add Vitest globals here */
+    "types": ["vite/client", "vitest/globals"],
+
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -27,6 +30,7 @@
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],                    // <-- ADDED THIS
       "@customTypes/*": ["src/types/*"],
       "@components/*": ["src/components/*"],
       "@features/*": ["src/features/*"],
@@ -34,6 +38,7 @@
       "@context/*": ["src/context/*"],
       "@data/*": ["src/data/*"]
     },
+
     "allowSyntheticDefaultImports": true
   },
   "include": ["src"]
