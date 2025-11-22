@@ -1,77 +1,126 @@
 import { useState } from "react";
-import styles from "../styles/Admin.module.scss";
+import { searchUsers, createArtist } from "@context/util/userService";
+import { useUser } from "@context/UserContext";
 
 export function Admin() {
 
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		password: "",
-		role: "",
-	});
+    const { user } = useUser();
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log("Form submitted:", formData);
+    const [formData, setFormData] = useState({
+        userId: "",
+        name: "",
+        email: "",
+        bio: "",
+        imageUrl: ""
+    });
 
-		// API for usercreation
-	};
+    const [message, setMessage] = useState("");
 
-	return (
-		<div className={styles.profilePage}>
-			<div className={styles.profileCard}>
-				<h2>Create New User</h2>
-				<form onSubmit={handleSubmit} className={styles.form}>
-					
-					<label>Name</label>
-					<input
-						type="text"
-						name="name"
-						value={formData.name}
-						onChange={handleChange}
-						required
-					/>
+    // Search existing users
+    const handleSearch = async () => {
+        if (!searchTerm || !user?.token) return;
 
-					<label>Email</label>
-					<input
-						type="email"
-						name="email"
-						value={formData.email}
-						onChange={handleChange}
-						required
-					/>
+        try {
+            const results = await searchUsers(searchTerm, user.token);
+            setSearchResults(results);
+        } catch (err: any) {
+            console.error(err);
+        }
+    };
 
-					<label>Password</label>
-					<input
-						type="password"
-						name="password"
-						value={formData.password}
-						onChange={handleChange}
-						required
-					/>
+    // Load selected user into form
+    const loadUserToForm = (u: any) => {
+        setFormData({
+            userId: u.id,
+            name: u.userName,
+            email: u.email,
+            bio: "",
+            imageUrl: ""
+        });
 
-					<label>Role</label>
-					<select
-						name="role"
-						value={formData.role}
-						onChange={handleChange}
-						required
-					>
-						<option value="">Select role</option>
-						<option value="admin">Admin</option>
-						<option value="editor">Artist</option>
-						<option value="user">User</option>
-					</select>
+        setSearchResults([]);
+        setSearchTerm("");
+    };
 
-					<button type="submit" className={styles.primaryBtn}>
-						Create User
-					</button>
-				</form>
-			</div>
-		</div>
-	);
+    // Submit to CreateArtist endpoint
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (!user?.token) return;
+
+        try {
+            const response = await createArtist(formData, user.token);
+            setMessage(response.message);
+        } catch (err: any) {
+            setMessage(err.message);
+        }
+    };
+
+    return (
+        <div className={styles.profilePage}>
+            <div className={styles.profileCard}>
+
+                <h2>Search User</h2>
+                <input
+                    type="text"
+                    placeholder="Search by email or name…"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button onClick={handleSearch}>Search</button>
+
+                {searchResults.length > 0 && (
+                    <div>
+                        {searchResults.map((u: any) => (
+                            <div
+                                key={u.id}
+                                onClick={() => loadUserToForm(u)}
+                                className={styles.searchItem}
+                            >
+                                {u.userName} ({u.email})
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                <h2>Create Artist</h2>
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label>User Name</label>
+                    <input
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
+
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    />
+
+                    <label>Bio</label>
+                    <textarea
+                        value={formData.bio}
+                        onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                    />
+
+                    <label>Image URL</label>
+                    <input
+                        type="text"
+                        value={formData.imageUrl}
+                        onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                    />
+
+                    <button type="submit"> Uplift user to artist</button>
+                </form>
+
+                {message && <p>{message}</p>}
+            </div>
+        </div>
+    );
 }
