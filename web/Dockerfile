@@ -1,19 +1,19 @@
 # Multi-stage build for React frontend
 # Stage 1: Build the React application
-FROM node:22 as build
+FROM node:22 AS build
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production --silent
+RUN npm ci --silent
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN npm run build -- --mode=production
 
 # Stage 2: Serve the application with nginx
 FROM nginx:alpine

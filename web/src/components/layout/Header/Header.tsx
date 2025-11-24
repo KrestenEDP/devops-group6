@@ -7,7 +7,7 @@ import { useUser } from "@context/UserContext.tsx";
 export function Header() {
     const navigate = useNavigate();
 
-    const { user, isLoggedIn, logout } = useUser();
+    const { isLoggedIn } = useUser();
 
     return (
         <header className={styles.header}>

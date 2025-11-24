@@ -1,9 +1,10 @@
-import {createDataContext, type DataAction, type DataState} from "./createDataContext";
+import {createDataContext, type DataAction, type DataState} from "./util/createDataContext.tsx";
 import type { Auction } from "@customTypes/auction.ts";
 import React from "react";
-import {handleApiResponse} from "@context/handleApiResponse.ts";
+import {handleApiResponse} from "@context/util/handleApiResponse.ts";
 //import { mockAuctions } from "@data/mockAuctions.ts";
 import type {AuctionCreateDto} from "@context/dtos/AuctionCreateDto.ts";
+import {logout} from "@context/util/usersession.ts";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 
@@ -56,7 +57,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             body: JSON.stringify(amount),
         });
 
-        await handleApiResponse(res, "Failed to place bid");
+        await handleApiResponse(res, "Failed to place bid", logout);
 
         const updatedItems = context.state.items.map(a =>
             a.id === auctionId ? { ...a, highestBid: amount, bidCount: a.bidCount+1 } : a
@@ -75,7 +76,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             body: JSON.stringify(data),
         });
 
-        await handleApiResponse(res, "Failed to create auction");
+        await handleApiResponse(res, "Failed to create auction", logout);
 
         const newAuction: Auction = await res.json();
 
@@ -93,7 +94,7 @@ export const useAuctionsActions  = (): AuctionsContextType & AuctionActions => {
             body: JSON.stringify(data),
         });
 
-        await handleApiResponse(res, "Failed to update auction");
+        await handleApiResponse(res, "Failed to update auction", logout);
 
         const updatedItems = context.state.items.map(a => (a.id === auctionId ? { ...a, ...data } : a));
         context.dispatch({ type: "SET_ITEMS", payload: updatedItems });

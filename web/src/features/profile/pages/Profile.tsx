@@ -4,14 +4,14 @@ import { useUser } from "@context/UserContext.tsx";
 import styles from "../styles/Profile.module.scss";
 import { ROUTES } from "@routes/routes";
 import { formatCurrency } from "@data/mockAuctions";
-import {parseRole, Role} from "@customTypes/Role.ts";
+import {parseRole, Roles} from "@customTypes/Role.ts";
 import {useTransactions} from "@context/TransactionContext.tsx";
 
 export function Profile() {
 	const navigate = useNavigate();
 	const { user, isLoggedIn, logout } = useUser();
 
-	const [name, setName] = useState(user?.name ?? "");
+	const [userName, setUserName] = useState(user?.userName ?? "");
 	const [email, setEmail] = useState(user?.email ?? "");
 	const [message, setMessage] = useState<string | null>(null);
 
@@ -39,7 +39,7 @@ export function Profile() {
 	}
 
 	function handleSave() {
-		if (!name || !email) {
+		if (!userName || !email) {
 			setMessage("Name and email are required.");
 			return;
 		}
@@ -71,9 +71,9 @@ export function Profile() {
 					}}
 				>
 					<div className={styles.profileHeader} style={{ marginBottom: 0 }}>
-						<div className={styles.avatar}>{initials(user?.name)}</div>
+						<div className={styles.avatar}>{initials(user?.userName)}</div>
 						<div>
-							<h2>{user?.name}</h2>
+							<h2>{user?.userName}</h2>
 							<div>{user?.email}</div>
 						</div>
 					</div>
@@ -93,8 +93,8 @@ export function Profile() {
 					<div className={styles.formRow}>
 						<input
 							className={styles.input}
-							value={name}
-							onChange={(e) => setName(e.target.value)}
+							value={userName}
+							onChange={(e) => setUserName(e.target.value)}
 							placeholder="Full Name"
 						/>
 						<input
@@ -109,7 +109,7 @@ export function Profile() {
 						<button
 							className={styles.secondaryBtn}
 							onClick={() => {
-								setName(user?.name ?? "");
+								setUserName(user?.userName ?? "");
 								setEmail(user?.email ?? "");
 							}}
 						>
@@ -125,7 +125,7 @@ export function Profile() {
 					{message && <p role="status">{message}</p>}
 				</div>
 
-				{(user != null && parseRole(user.role) == Role.Artist) && (
+				{(user != null && parseRole(user.role) == Roles.Artist) && (
 				<div className={styles.buttonContainer}>
 					<button
 						className={styles.greenBtn}
@@ -134,6 +134,19 @@ export function Profile() {
 						}}
 					>
 						New Auction
+					</button>
+				</div>
+			)}
+
+			{(user != null && parseRole(user.role) == Roles.Admin) && (
+				<div className={styles.buttonContainer}>
+					<button
+						className={styles.greenBtn}
+						onClick={() => {
+							navigate(ROUTES.ADMIN);
+						}}
+					>
+						Admin
 					</button>
 				</div>
 			)}

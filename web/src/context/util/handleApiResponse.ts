@@ -1,18 +1,23 @@
-export async function handleApiResponse(res: Response, defaultMessage = "Something went wrong.") {
+export async function handleApiResponse(
+    res: Response,
+    defaultMessage = "Something went wrong.",
+    onUnauthorized?: () => void
+) {
     if (res.ok) return res;
 
     let errorMessage = defaultMessage;
 
     if (res.status === 401) {
         errorMessage = "You must be logged in to perform this action.";
+        onUnauthorized?.(); // Logout
     } else if (res.status === 403) {
         errorMessage = "You don’t have permission to perform this action.";
     } else {
         try {
-            const data = await res.json();
+            const data = await res.clone().json();
             if (data?.message) errorMessage = data.message;
         } catch {
-            const text = await res.text();
+            const text = await res.clone().text();
             if (text) errorMessage = text;
         }
     }
