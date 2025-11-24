@@ -2,13 +2,11 @@ name: Trigger auto deployment for art-ui
 
 # When this action will be executed
 on:
-  # Automatically trigger it when detected changes in repo
-  push:
-    branches: 
-      [ main ]
-    paths:
-    - '**'
-    - '.github/workflows/art-ui-AutoDeployTrigger-67084405-26cc-40bc-a20c-f4e005f7dc67.yml'
+  # Trigger after successfull test suite
+  workflow_run:
+    workflows: [ "tests" ]
+    types: [ completed ]
+    branches: [ main ]
 
   # Allow manual trigger 
   workflow_dispatch:      
