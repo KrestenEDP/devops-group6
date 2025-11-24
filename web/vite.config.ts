@@ -14,5 +14,14 @@ export default defineConfig({
       "@context": path.resolve(__dirname, "src/context"),
       "@data": path.resolve(__dirname, "src/data")
     }
+  },
+
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/tests/setup.ts",
+    coverage: {
+      reporter: ["text", "html"]
+    }
   }
 });

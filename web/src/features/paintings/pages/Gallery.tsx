@@ -21,7 +21,10 @@ export function Gallery() {
         <div className={styles.galleryPage}>
             <main className={styles.mainContent}>
                 <section className={styles.heroSection}>
-                    <h1 className={styles.heroTitle}>Current Auctions</h1>
+                    <h1
+                        className={styles.heroTitle}
+                        data-testid={`gallery-title`}
+                    >Current Auctions</h1>
                     <p className={styles.heroSubtitle}>
                         Discover exceptional artworks from renowned artists
                     </p>

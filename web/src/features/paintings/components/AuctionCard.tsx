@@ -14,6 +14,7 @@ export function AuctionCard({ auction }: AuctionCardProps) {
         <Link
             to={ROUTES.AUCTION_DETAIL(auction.id)}
             className={styles.auctionCardLink}
+            data-testid={`auction-card-${auction.id}`}
         >
             <div className={styles.auctionCard}>
                 <div className={styles.auctionImageContainer}>

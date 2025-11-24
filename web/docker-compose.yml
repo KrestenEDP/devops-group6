@@ -1,5 +1,4 @@
 services:
-  # Development with Docker Watch (modern approach)
   web-dev:
     build:
       context: .
@@ -16,17 +15,14 @@ services:
       - FAST_REFRESH=true
     develop:
       watch:
-        # Sync TypeScript and source files
         - action: sync
           path: ./src
           target: /app/src
           ignore:
             - node_modules/
-        # Sync public assets
         - action: sync
           path: ./public
           target: /app/public
-        # Rebuild when dependencies change
         - action: rebuild
           path: ./package.json
         - action: rebuild
@@ -43,3 +39,13 @@ services:
       - "8080:80"
     profiles:
       - prod
+
+  web-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["npm", "run", "test", "--", "--run"]
+    environment:
+      - CI=true
+    profiles:
+      - test
