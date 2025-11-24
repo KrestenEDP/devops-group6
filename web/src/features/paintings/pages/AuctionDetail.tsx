@@ -110,7 +110,7 @@ export function AuctionDetail() {
                                     className={styles.bidInput}
                                     type="number"
                                     placeholder="Place your bid"
-                                    value={bidAmount}
+                                    value={bidAmount === "" ? "" : (bidAmount <= 0 ? "" : bidAmount)}
                                     onChange={(e) => setBidAmount(Number(e.target.value))}
                                     data-testid={`bid-input`}
                                 />
