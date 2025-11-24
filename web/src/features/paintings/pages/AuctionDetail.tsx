@@ -56,7 +56,11 @@ export function AuctionDetail() {
     return (
         <div className={styles.detailPage}>
             <main className={styles.detailContent}>
-                <button className={styles.backButton} onClick={() => navigate(-1)}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => navigate(ROUTES.GALLERY)}
+                    data-testid={`back-button`}
+                >
                     <ArrowLeft size={20} /> Back to Auctions
                 </button>
 
@@ -75,8 +79,14 @@ export function AuctionDetail() {
                     {/* Info Section */}
                     <div className={styles.infoSection}>
                         <div className={styles.titleSection}>
-                            <h1 className={styles.paintingName}>{auction.title}</h1>
-                            <p className={styles.artistName}>{auction.artistName}</p>
+                            <h1
+                                className={styles.paintingName}
+                                data-testid={`painting-title`}
+                            >{auction.title}</h1>
+                            <p
+                                className={styles.artistName}
+                                data-testid={`painting-artist`}
+                            >{auction.artistName}</p>
                         </div>
 
                         {/* Bid Card with primary gradient applied */}
@@ -102,6 +112,7 @@ export function AuctionDetail() {
                                     placeholder="Place your bid"
                                     value={bidAmount}
                                     onChange={(e) => setBidAmount(Number(e.target.value))}
+                                    data-testid={`bid-input`}
                                 />
                                 <button
                                     className={styles.placeBidButton}
