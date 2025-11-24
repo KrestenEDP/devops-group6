@@ -1,28 +1,54 @@
 .profilePage {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	min-height: 100vh;
 	background: #f5f5f7;
-	padding: 20px;
+	padding: 40px 20px;
 }
 
 .profileCard {
 	background: #ffffff;
 	padding: 32px;
 	border-radius: 12px;
-	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-	max-width: 420px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+	max-width: 480px;
 	width: 100%;
 }
 
 .profileCard h2 {
-	margin-top: 0;
-	margin-bottom: 20px;
-	font-size: 1.6rem;
-	color: #333;
+	margin: 10px 0 20px;
+	font-size: 1.5rem;
+	color: #222;
 	font-weight: 600;
-	text-align: center;
+	text-align: left;
+}
+
+.searchSection {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.searchResults {
+	background: #fafafa;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 8px;
+	margin-bottom: 20px;
+	max-height: 160px;
+	overflow-y: auto;
+}
+
+.searchItem {
+	padding: 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.searchItem:hover {
+	background: #e9f1ff;
 }
 
 .form {
@@ -38,6 +64,7 @@ label {
 }
 
 input,
+textarea,
 select {
 	width: 100%;
 	padding: 10px 12px;
@@ -47,7 +74,13 @@ select {
 	transition: border-color 0.2s ease;
 }
 
+textarea {
+	min-height: 80px;
+	resize: vertical;
+}
+
 input:focus,
+textarea:focus,
 select:focus {
 	border-color: #0066ff;
 	outline: none;
@@ -65,7 +98,9 @@ select:focus {
 	cursor: pointer;
 	transition: background 0.2s ease;
 	font-weight: 600;
+	width: 100%;
 }
+
 
 .primaryBtn:hover {
 	background-color: #0052cc;
@@ -73,4 +108,34 @@ select:focus {
 
 .primaryBtn:active {
 	background-color: #003f99;
+}
+
+.searchBtn {
+	padding: 6px;
+	border: none;
+	background-color: #0066ff;
+	color: white;
+	font-size: 0.8rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.2s ease;
+	font-weight: 600;
+	width: auto;
+}
+
+
+.searchBtn:hover {
+	background-color: #0052cc;
+}
+
+.searchBtn:active {
+	background-color: #003f99;
+}
+
+.message {
+	margin-top: 15px;
+	font-size: 0.95rem;
+	color: #0066ff;
+	font-weight: 500;
+	text-align: center;
 }

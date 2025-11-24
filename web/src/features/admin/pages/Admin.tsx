@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { searchUsers, createArtist } from "@context/util/userService";
 import { useUser } from "@context/UserContext";
+import styles from "../styles/Admin.module.scss";
+
 
 export function Admin() {
 
@@ -64,16 +66,20 @@ export function Admin() {
             <div className={styles.profileCard}>
 
                 <h2>Search User</h2>
-                <input
-                    type="text"
-                    placeholder="Search by email or name…"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button onClick={handleSearch}>Search</button>
+
+                <div className={styles.searchSection}>
+                    <input
+                        type="text"
+                        placeholder="Search by email or name…"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+
+                <button className={styles.searchBtn} onClick={handleSearch}>Search</button>
 
                 {searchResults.length > 0 && (
-                    <div>
+                    <div className={styles.searchResults}>
                         {searchResults.map((u: any) => (
                             <div
                                 key={u.id}
@@ -116,11 +122,14 @@ export function Admin() {
                         onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                     />
 
-                    <button type="submit"> Uplift user to artist</button>
+                    <button type="submit" className={styles.primaryBtn}>
+                        Uplift user to artist
+                    </button>
                 </form>
 
-                {message && <p>{message}</p>}
+                {message && <p className={styles.message}>{message}</p>}
             </div>
         </div>
     );
+
 }
