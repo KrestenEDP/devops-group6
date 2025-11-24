@@ -1,7 +1,4 @@
-import { useUser } from "@context/UserContext";
-
 const API_BASE = import.meta.env.VITE_API_URL;
-
 
 export async function getUsers(token: string) {
     const res = await fetch(`${API_BASE}/users`, {
@@ -14,7 +11,7 @@ export async function getUsers(token: string) {
     if (!res.ok) throw new Error("Failed to fetch users");
 
     return await res.json();
-};
+}
 
 export async function searchUsers(query: string, token: string) {
     const res = await fetch(`${API_BASE}/users/search?query=${encodeURIComponent(query)}`, {

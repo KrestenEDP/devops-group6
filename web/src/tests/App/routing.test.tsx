@@ -3,21 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockAuctions } from '@data/mockAuctions';
 import { App } from '@/App';
 
-// Mock the global fetch before tests
-beforeAll(() => {
-    global.fetch = vi.fn(() =>
-        Promise.resolve({
-            ok: true,
-            json: () => Promise.resolve(mockAuctions),
-        } as Response)
-    ) as unknown as typeof fetch;
-});
-
-// Reset mocks after each test
-afterEach(() => {
-    vi.clearAllMocks();
-});
-
 describe('App Routing', () => {
     test('renders Gallery page on default route', async () => {
         render(
