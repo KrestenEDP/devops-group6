@@ -17,8 +17,9 @@ import {AuctionsProvider} from "./context/AuctionsContext.tsx";
 import {Profile} from "@features/profile/pages/Profile.tsx";
 import { NewArt } from "@features/paintings/pages/NewArt.tsx";
 import {TransactionsProvider} from "@context/TransactionContext.tsx";
+import type {ReactNode} from "react";
 
-export function AppProviders({ children }) {
+export function AppProviders({ children }: { children: ReactNode }) {
     return (
         <UserProvider>
         <TransactionsProvider>

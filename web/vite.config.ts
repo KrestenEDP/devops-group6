@@ -15,13 +15,4 @@ export default defineConfig({
       "@data": path.resolve(__dirname, "src/data")
     }
   },
-
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: "./src/tests/setup.ts",
-    coverage: {
-      reporter: ["text", "html"]
-    }
-  }
 });
