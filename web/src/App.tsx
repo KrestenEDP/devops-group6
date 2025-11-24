@@ -18,30 +18,44 @@ import {Profile} from "@features/profile/pages/Profile.tsx";
 import { NewArt } from "@features/paintings/pages/NewArt.tsx";
 import {TransactionsProvider} from "@context/TransactionContext.tsx";
 
-export function App() {
+export function AppProviders({ children }) {
     return (
         <UserProvider>
         <TransactionsProvider>
         <ArtistsProvider>
         <AuctionsProvider>
-            <Layout>
-                <Routes>
-                    <Route path={ROUTES.GALLERY} element={<Gallery />} />
-                    <Route path={ROUTES.AUCTION_DETAIL()} element={<AuctionDetail />} />
-                    <Route path={ROUTES.LOGIN} element={<Login />} />
-                    <Route path={ROUTES.CREATE_ACCOUNT} element={<UserCreation />} />
-                    <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-                    <Route path={ROUTES.ARTISTS} element={<Artists />} />
-                    <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
-                    <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-                    <Route path={ROUTES.PROFILE} element={<Profile />} />
-                    <Route path={ROUTES.NEW_ART} element={<NewArt />} />
-                    <Route path={ROUTES.ADMIN} element={<Admin />} />
-                </Routes>
-            </Layout>
+            {children}
         </AuctionsProvider>
         </ArtistsProvider>
         </TransactionsProvider>
         </UserProvider>
+    );
+}
+
+export function AppRoutes() {
+    return (
+        <Layout>
+            <Routes>
+                <Route path={ROUTES.GALLERY} element={<Gallery />} />
+                <Route path={ROUTES.AUCTION_DETAIL()} element={<AuctionDetail />} />
+                <Route path={ROUTES.LOGIN} element={<Login />} />
+                <Route path={ROUTES.CREATE_ACCOUNT} element={<UserCreation />} />
+                <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+                <Route path={ROUTES.ARTISTS} element={<Artists />} />
+                <Route path={ROUTES.ARTIST_DETAIL()} element={<ArtistDetail />} />
+                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+                <Route path={ROUTES.PROFILE} element={<Profile />} />
+                <Route path={ROUTES.NEW_ART} element={<NewArt />} />
+                <Route path={ROUTES.ADMIN} element={<Admin />} />
+            </Routes>
+        </Layout>
+    );
+}
+
+export function App() {
+    return (
+        <AppProviders>
+            <AppRoutes />
+        </AppProviders>
     );
 }
